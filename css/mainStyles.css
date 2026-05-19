@@ -1,0 +1,826 @@
+:root {
+    --fondo-gradiente: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+    --caja-color: rgba(255, 255, 255, 0.9);
+    --rosa-vibrante: #ff477e;
+    --rosa-oscuro: #ff0a54;
+    --texto-oscuro: #4a5568;
+    --card-hover: #fff0f3;
+}
+
+/* ========================================================== */
+/* TEMA OSCURO GLOBAL (ACTIVADO DINÁMICAMENTE POR JS)         */
+/* ========================================================== */
+body.dark-theme {
+    /* Reemplazamos los colores base por tonos cósmicos profundos */
+    --fondo-gradiente: linear-gradient(135deg, #0a040b 0%, #1d0a21 100%);
+    --caja-color: rgba(22, 10, 26, 0.85); /* Panel lateral y cajas oscuras */
+    --texto-oscuro: #f8fafc; /* Vuelve los textos grises a blancos brillantes */
+    --rosa-oscuro: #ff477e; /* Aclara un poco el rosa para que resalte en negro */
+    --card-hover: rgba(255, 71, 126, 0.15);
+}
+
+body.dark-theme .clock-unit {
+    background: rgba(255, 255, 255, 0.05); /* Fondo oscuro semitransparente elegante */
+    border: 1px solid rgba(255, 71, 126, 0.25); /* Borde rosa neón sutil */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Agregamos una transición suave a todo el sitio para que no sea un cambio brusco */
+body, .dashboard-sidebar, .view-box, .clock-unit, .test-cat-btn, .quiz-opt-btn {
+    transition: background 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--fondo-gradiente); min-height: 100vh;
+    padding: 30px 20px; display: flex; justify-content: center; align-items: center;
+}
+
+.hidden { display: none !important; }
+
+/* ANIMACIÓN GENÉRICA FADE IN PARA TRANSICIONES SUAVES */
+.fade-in {
+    animation: aparecerSuave 0.4s forwards ease-out;
+}
+
+@keyframes aparecerSuave {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- INTERFAZ CORE --- */
+.dashboard-container {
+    width: 100%; max-width: 950px; position: relative; z-index: 10;
+    display: grid; grid-template-columns: 1fr; gap: 30px;
+}
+
+@media (min-width: 850px) {
+    .dashboard-container { grid-template-columns: 340px 1fr; align-items: start; }
+    .dashboard-sidebar { position: sticky; top: 30px; }
+}
+
+/* --- PANEL ASIDE LATERAL --- */
+.dashboard-sidebar {
+    background: var(--caja-color); padding: 35px 25px 30px 25px;
+    border-radius: 25px; box-shadow: 0 8px 25px rgba(255, 71, 126, 0.08);
+    border: 2px solid rgba(255, 194, 209, 0.4); text-align: center;
+}
+
+@media (min-width: 850px) { .dashboard-sidebar { text-align: left; } }
+
+.dashboard-sidebar h1 {
+    color: var(--rosa-oscuro); font-size: 1.8rem; margin-bottom: 20px;
+    position: relative; display: inline-block; padding-bottom: 8px;
+}
+
+.dashboard-sidebar h1::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 3px; background: linear-gradient(90deg, var(--rosa-vibrante), var(--rosa-oscuro)); border-radius: 2px;
+}
+
+@media (min-width: 850px) { .dashboard-sidebar h1::after { left: 0; transform: translateX(0); width: 80px; } }
+
+.welcome-text { color: var(--texto-oscuro); font-size: 0.92rem; line-height: 1.6; margin-bottom: 25px; }
+
+.header-clock-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px 0; width: 100%; }
+.counter-clock { display: flex; gap: 10px; }
+.sub-clock { margin-top: 2px; }
+
+.clock-unit {
+    background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%); border: 1px solid rgba(255, 71, 126, 0.15);
+    padding: 8px 6px; border-radius: 12px; min-width: 70px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
+}
+
+.clock-unit span { display: block; font-size: 1.35rem; font-weight: bold; color: var(--rosa-oscuro); }
+.clock-unit label { font-size: 0.65rem; color: var(--texto-oscuro); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+.sidebar-footer { margin-top: 30px; width: 100%; }
+.logout-btn {
+    width: 100%; background: #4a5568; color: white; padding: 14px; border: none; border-radius: 12px;
+    font-weight: bold; font-size: 0.95rem; cursor: pointer; letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); transition: background 0.3s, transform 0.1s;
+}
+.logout-btn:hover { background: #2d3748; }
+.logout-btn:active { transform: scale(0.98); }
+
+/* --- REJILLA DE LAS TARJETAS --- */
+.menu-grid { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; justify-items: center; }
+@media (min-width: 550px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.menu-card {
+    background: var(--caja-color); border-radius: 20px; text-align: center; cursor: pointer; position: relative; overflow: hidden;
+    width: 100%; max-width: 270px; aspect-ratio: 1 / 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 25px; border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s, box-shadow 0.4s;
+}
+
+.menu-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), var(--bg-image);
+    background-size: cover; background-position: center; opacity: 0; transition: opacity 0.4s ease; z-index: 1;
+}
+
+.card-normal-content { position: relative; z-index: 2; transition: all 0.4s ease; }
+.card-hover-content { position: absolute; z-index: 2; padding: 15px; bottom: 20px; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; }
+.card-description { color: #ffffff; font-size: 0.85rem; line-height: 1.4; font-weight: 500; }
+.card-icon { font-size: 3rem; margin-bottom: 12px; transition: all 0.4s ease; }
+.menu-card h3 { color: var(--rosa-oscuro); font-size: 1.12rem; line-height: 1.3; transition: all 0.4s ease; }
+
+.menu-card:hover { transform: translateY(-10px); border-color: var(--rosa-vibrante); box-shadow: 0 15px 30px rgba(255, 71, 126, 0.25); }
+.menu-card:hover::before { opacity: 1; }
+.menu-card:hover .card-normal-content { transform: translateY(-25px); }
+.menu-card:hover .card-icon { opacity: 0; transform: scale(0); }
+.menu-card:hover h3 { color: #ffffff; font-size: 1.2rem; }
+.menu-card:hover .card-hover-content { opacity: 1; transform: translateY(0); }
+
+/* ========================================== */
+/* --- SECCIÓN GLOBAL DE VISTAS INTERNAS ---  */
+/* ========================================== */
+.view-container { width: 100%; }
+.view-box {
+    background: var(--caja-color); padding: 40px 30px; border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(255, 71, 126, 0.08); border: 2px solid rgba(255, 194, 209, 0.4);
+    text-align: center; position: relative;
+}
+
+/* NUEVA REGLA: Respiro visual para Harli (Evita el amontonamiento) */
+.view-box h2 {
+    margin-bottom: 12px;
+}
+
+.view-subtitle { color: var(--texto-oscuro); font-size: 0.95rem; margin-bottom: 30px; font-style: italic; }
+
+/* ========================================== */
+/* --- EXCLUSIVOS: MÓDULO DE POESÍA INTERACTIVO --- */
+/* ========================================== */
+.poems-list-container { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; padding: 5px; }
+
+/* BOTÓN DE POEMA REFORMADO CON DISEÑO ASIMÉTRICO DIAGONAL */
+.poem-item-btn {
+    background: white; border: 1px solid rgba(255, 194, 209, 0.4);
+    padding: 18px 25px; border-radius: 15px; position: relative; overflow: hidden;
+    display: flex; justify-content: flex-start; align-items: center;
+    cursor: pointer !important; font-weight: 600; color: var(--texto-oscuro); font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); transition: all 0.35s ease;
+}
+
+/* Capa virtual derecha oculta que contiene la foto recortada en diagonal */
+.poem-item-btn::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.3)), var(--poem-bg);
+    background-size: cover; background-position: center;
+    /* Polígono invisible colapsado contra la derecha del botón */
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    transition: clip-path 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1;
+}
+
+/* Protege el título de ser tapado por la imagen trasera */
+.poem-item-btn span {
+    position: relative; z-index: 2;
+    transition: transform 0.3s ease;
+    max-width: 55%; text-align: left;
+}
+
+/* COMPORTAMIENTO INTERACTIVO REVELACIÓN DIAGONAL */
+.poem-item-btn:hover {
+    border-color: var(--rosa-vibrante);
+    box-shadow: 0 6px 15px rgba(255, 71, 126, 0.12);
+    transform: translateX(4px);
+}
+
+/* Despliega la imagen cortándola exactamente a la mitad derecha */
+.poem-item-btn:hover::before {
+    clip-path: polygon(55% 0, 100% 0, 100% 100%, 42% 100%);
+}
+
+.poem-item-btn:hover span {
+    transform: translateX(5px); /* Desplaza sutilmente las letras hacia el fondo blanco */
+}
+
+/* --- PERGAMINO CLÁSICO DE ALTA INTENSIDAD PRÍNCIPAL --- */
+/* ========================================== */
+/* --- EXCLUSIVOS: MÓDULO DE POESÍA ACTUALIZADO --- */
+/* ========================================== */
+
+/* Contenedor de navegación superior para evitar colisiones */
+.back-nav-container {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px; /* Empuja el título hacia abajo de forma segura */
+}
+
+/* --- CORRECCIÓN DE LA FLECHA DE REGRESO DE FLUJO NATURAL --- */
+.view-back-icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.88rem;
+    color: var(--rosa-vibrante);
+    cursor: pointer !important;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+    user-select: none !important; /* Evita sombreados azules al tocar la tablet */
+}
+.view-back-icon:hover { transform: translateX(-4px); }
+
+.poems-list-container { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; padding: 5px; }
+
+/* BOTÓN DE POEMA CON EFECTO REVELACIÓN DIAGONAL */
+.poem-item-btn {
+    background: white; border: 1px solid rgba(255, 194, 209, 0.4);
+    padding: 18px 25px; border-radius: 15px; position: relative; overflow: hidden;
+    display: flex; justify-content: flex-start; align-items: center;
+    cursor: pointer !important; font-weight: 600; color: var(--texto-oscuro); font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); transition: all 0.35s ease;
+}
+
+.poem-item-btn::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.3)), var(--poem-bg);
+    background-size: cover; background-position: center;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    transition: clip-path 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1;
+}
+
+.poem-item-btn span { position: relative; z-index: 2; transition: transform 0.3s ease; max-width: 55%; text-align: left; }
+.poem-item-btn:hover { border-color: var(--rosa-vibrante); box-shadow: 0 6px 15px rgba(255, 71, 126, 0.12); transform: translateX(4px); }
+.poem-item-btn:hover::before { clip-path: polygon(55% 0, 100% 0, 100% 100%, 42% 100%); }
+.poem-item-btn:hover span { transform: translateX(5px); }
+
+/* ========================================== */
+/* --- NUEVA DISTRIBUCIÓN DEL VISOR (READER) --- */
+/* ========================================== */
+
+/* Forzamos a que todo el lector se alinee en un bloque perfectamente simétrico */
+.reader-split-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado uniforme entre la tarjeta del título y el pergamino */
+    width: 100%;
+    max-width: 580px; /* Ancho idéntico ideal coordinado */
+    margin: 0 auto;
+}
+
+/* Contenedor exclusivo para el Título del Poema */
+.poem-title-card {
+    background: var(--caja-color);
+    padding: 22px 20px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid rgba(255, 194, 209, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 71, 126, 0.05);
+}
+
+.poem-title-card h2 {
+    color: var(--rosa-oscuro);
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* El Pergamino Clásico de Lectura (Mismo ancho exacto que la tarjeta del título) */
+.parchment-scroll {
+    background: #fffdf8;
+    border: 3px solid #c9b68d; 
+    padding: 35px 25px; 
+    border-radius: 22px;
+    box-shadow: inset 0 0 25px rgba(184, 150, 93, 0.28), 0 8px 20px rgba(0,0,0,0.04);
+    max-height: 400px; 
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* Estilización del Botón Romántico Inferior */
+.reader-footer {
+    text-align: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.back-romantic-btn {
+    background: var(--caja-color);
+    color: var(--rosa-vibrante);
+    border: 2px solid rgba(255, 194, 209, 0.6);
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.back-romantic-btn:hover {
+    background: var(--card-hover);
+    border-color: var(--rosa-vibrante);
+    color: var(--rosa-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 71, 126, 0.1);
+}
+.back-romantic-btn:active { transform: scale(0.98); }
+
+/* --- ENTORNO: FONDOS Y MODAL DE APAGADO --- */
+.lunas-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
+.luna { position: absolute; width: 140px; height: 140px; border-radius: 50%; background: transparent; box-shadow: 25px 25px 0 0 rgba(255, 10, 84, 0.05); filter: blur(1px); }
+.luna-1 { top: 5%; left: 3%; transform: rotate(-20deg); }
+.luna-2 { bottom: 8%; right: 4%; transform: rotate(35deg); }
+.luna-3 { top: 45%; left: 90%; transform: rotate(110deg) scale(0.7); }
+
+.estrella { position: absolute; background: #ffffff; border-radius: 50%; box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); animation: parpadeoEstrella 4s infinite ease-in-out; pointer-events: none; }
+.est-1 { width: 5px; height: 5px; top: 12%; left: 3%; animation-delay: 0s; }
+.est-2 { width: 7px; height: 7px; top: 75%; left: 2%; animation-delay: 1.5s; }
+.est-3 { width: 4px; height: 4px; top: 15%; right: 2%; animation-delay: 0.7s; }
+.est-4 { width: 6px; height: 6px; top: 82%; right: 3%; animation-delay: 2.2s; }
+
+@keyframes parpadeoEstrella { 0%, 100% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.2); } }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 999; animation: fadeInModal 0.3s forwards; }
+.modal-box { background: white; padding: 35px; border-radius: 20px; text-align: center; max-width: 340px; width: 90%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+.modal-box.logout-box { border-top: 5px solid #4a5568; }
+.modal-box.logout-box h3 { color: #4a5568; margin-bottom: 12px; letter-spacing: 1px; }
+.modal-box.logout-box p { color: #4a5568; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+.modal-icon { font-size: 3rem; margin-bottom: 15px; }
+.loading-bar { width: 100%; height: 6px; background: #eee; border-radius: 3px; overflow: hidden; }
+.progress { width: 0%; height: 100%; }
+.logout-progress { background: #4a5568; animation: cargarBarra 2.5s linear forwards; }
+@keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cargarBarra { to { width: 100%; } }
+
+/* ========================================== */
+/* ESTILOS EXCLUSIVOS: BOTIQUÍN EMOCIONAL     */
+/* ========================================== */
+
+/* Rejilla de estados de ánimo */
+.moods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.mood-btn {
+    background: white;
+    border: 2px solid rgba(255, 194, 209, 0.4);
+    padding: 15px 10px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.mood-btn:hover {
+    border-color: var(--rosa-vibrante);
+    background: var(--card-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(255, 71, 126, 0.1);
+}
+
+/* --- INTERFAZ DE LÍNEA DE TIEMPO / CHAT --- */
+.chat-timeline {
+    background: #f8fafc;
+    border: 2px solid #edf2f7;
+    border-radius: 20px;
+    height: 320px;
+    overflow-y: auto;
+    padding: 20px;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* Burbujas del chat estilo mensajería tierno */
+.chat-bubble {
+    background: white;
+    border: 1px solid #e2e8f0;
+    color: var(--texto-oscuro);
+    padding: 12px 16px;
+    border-radius: 18px 18px 18px 4px; /* Esquina inferior izquierda recortada */
+    max-width: 85%;
+    align-self: flex-start; /* Alineado a la izquierda (Tú le hablas a ella) */
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    animation: aparecerSuave 0.3s forwards;
+}
+
+/* Contenedor multimedia al final de la conversación */
+.chat-media-container {
+    margin-top: 5px;
+    padding: 12px;
+    background: #fff0f3;
+    border: 1px dashed var(--rosa-vibrante);
+    border-radius: 12px;
+    color: var(--rosa-oscuro);
+    font-weight: 600;
+    font-size: 0.9rem;
+    align-self: flex-start;
+    animation: aparecerSuave 0.4s forwards;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Zonas de interacción del mini-juego */
+.chat-input-zone {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    animation: aparecerSuave 0.3s forwards;
+}
+
+.chat-input-zone input {
+    flex: 1; padding: 12px; border: 2px solid #e2e8f0;
+    border-radius: 10px; outline: none; transition: 0.3s;
+}
+.chat-input-zone input:focus { border-color: var(--rosa-vibrante); }
+
+.chat-input-zone button {
+    width: auto; padding: 0 20px; font-size: 0.9rem;
+}
+
+.chat-choices-zone {
+    display: flex; justify-content: center; gap: 15px; margin-top: 15px;
+}
+.choice-btn {
+    padding: 10px 30px; border: none; border-radius: 10px;
+    font-weight: bold; cursor: pointer !important; transition: 0.2s;
+}
+.choice-btn.yes { background: #2a9d8f; color: white; }
+.choice-btn.no { background: #e63946; color: white; }
+.choice-btn:hover { transform: scale(1.05); }
+
+/* ========================================== */
+/* ESTILOS EXCLUSIVOS: MÓDULO TEST DE EQ      */
+/* ========================================== */
+
+/* Menú vertical de categorías */
+.test-categories-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.test-cat-btn {
+    background: white;
+    border: 2px solid rgba(255, 194, 209, 0.4);
+    padding: 18px 20px;
+    border-radius: 15px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    text-align: left;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
+}
+
+.test-cat-btn:hover {
+    border-color: var(--rosa-vibrante);
+    background: var(--card-hover);
+    transform: translateX(5px); /* Desplazamiento lateral suave */
+    box-shadow: 0 6px 12px rgba(255, 71, 126, 0.1);
+}
+
+/* --- BARRA DE PROGRESO DE TRIVIA --- */
+.quiz-progress-container {
+    width: 100%;
+    height: 6px;
+    background: #edf2f7;
+    border-radius: 3px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.quiz-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--rosa-vibrante), var(--rosa-oscuro));
+    transition: width 0.4s ease; /* Transición fluida al avanzar */
+}
+
+/* --- TARJETA DE LA PREGUNTA --- */
+.quiz-card {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.quiz-question-counter {
+    font-size: 0.8rem;
+    color: var(--rosa-vibrante);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#quiz-question-text {
+    color: var(--texto-oscuro);
+    font-size: 1.3rem;
+    margin: 15px 0 30px 0;
+    line-height: 1.4;
+}
+
+/* Contenedor de las opciones múltiples */
+.quiz-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-opt-btn {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 0.98rem;
+    color: var(--texto-oscuro);
+    font-weight: 500;
+    cursor: pointer !important;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.quiz-opt-btn:hover {
+    background: #f8fafc;
+    border-color: var(--rosa-vibrante);
+    transform: scale(1.01);
+}
+
+/* --- PANTALLA DE PUNTUACIÓN FINAL --- */
+.score-reveal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.result-icon {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+/* Círculo medalla para enmarcar la nota */
+.score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+    border: 3px dashed var(--rosa-vibrante);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+    box-shadow: 0 8px 15px rgba(255, 71, 126, 0.1);
+}
+
+#result-score-digits {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--rosa-oscuro);
+}
+
+#result-feedback-text {
+    font-size: 1.1rem;
+    color: var(--texto-oscuro);
+    font-weight: 500;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+/* ========================================================== */
+/* MODO CONCENTRACIÓN: TEST DE EQ CIBER-ROMÁNTICO PREMIUM     */
+/* ========================================================== */
+
+/* 1. Transformación de la caja principal a modo nocturno profundo */
+.view-box.test-box {
+    background: linear-gradient(135deg, #110714 0%, #220f28 100%) !important;
+    border: 2px solid var(--rosa-vibrante) !important;
+    box-shadow: 0 15px 35px rgba(255, 71, 126, 0.25) !important;
+    color: #ffffff;
+    overflow: relative;
+}
+
+/* 2. Efecto de resplandor neón en los títulos principales */
+.test-box h2, .test-box h3 {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(255, 71, 126, 0.6);
+}
+
+.test-box .view-subtitle {
+    color: #ffe5ec !important; /* Texto pastel suave de lectura */
+}
+
+.test-box .quiz-question-counter {
+    color: var(--rosa-vibrante) !important;
+    text-shadow: 0 0 5px rgba(255, 71, 126, 0.4);
+}
+
+/* 3. Botones adaptados a la oscuridad (Opacos al inicio, neón al hover) */
+.test-box .test-cat-btn, 
+.test-box .quiz-opt-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 194, 209, 0.15) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.test-box .test-cat-btn:hover, 
+.test-box .quiz-opt-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 71, 126, 0.2) 0%, rgba(255, 10, 84, 0.2) 100%) !important;
+    border-color: var(--rosa-vibrante) !important;
+    box-shadow: 0 0 15px rgba(255, 71, 126, 0.45) !important;
+    transform: scale(1.015) translateX(4px); /* Suave empuje interactivo */
+}
+
+/* 4. Contenedor de la barra de progreso en la penumbra */
+.test-box .quiz-progress-container {
+    background: #291632 !important;
+}
+
+/* 5. Medalla circular de puntuación modo resplandor lunar */
+.test-box .score-circle {
+    background: rgba(255, 71, 126, 0.08) !important;
+    border: 3px dashed var(--rosa-vibrante) !important;
+    box-shadow: 0 0 25px rgba(255, 71, 126, 0.3) !important;
+}
+
+.test-box #result-score-digits {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px var(--rosa-vibrante);
+}
+
+/* 6. SISTEMA DE PARTÍCULAS INTERACTIVAS FLOTANTES (EFECTO VIDEOJUEGO) */
+.trivia-particle {
+    position: absolute;
+    font-size: 1.3rem;
+    opacity: 0.2;
+    pointer-events: none;
+    animation: flotarTriviaAnim 6s infinite ease-in-out;
+    z-index: 1;
+    user-select: none;
+}
+
+/* Posicionamiento estratégico en esquinas sin estorbar los clics */
+.part-1 { top: 12%; left: 5%; animation-delay: 0s; }
+.part-2 { bottom: 10%; left: 6%; animation-delay: 1.5s; font-size: 1.5rem; }
+.part-3 { top: 15%; right: 6%; animation-delay: 3s; font-size: 1.2rem; }
+.part-4 { bottom: 12%; right: 5%; animation-delay: 4.5s; }
+
+/* Animación fluida de levitación, rotación y brillo intermitente */
+@keyframes flotarTriviaAnim {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translateY(-15px) rotate(12deg) scale(1.15);
+        opacity: 0.6;
+        filter: drop-shadow(0 0 8px var(--rosa-vibrante)); /* Hace brillar los emojis */
+    }
+}
+
+/* ========================================== */
+/* ESTILOS EXCLUSIVOS: PREGUNTAS Y RESPUESTAS */
+/* ========================================== */
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.faq-item {
+    background: white;
+    border: 2px solid rgba(255, 194, 209, 0.4);
+    border-radius: 15px;
+    overflow: hidden; /* Clave para el efecto acordeón */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.faq-item.active {
+    border-color: var(--rosa-vibrante);
+    box-shadow: 0 6px 15px rgba(255, 71, 126, 0.12);
+    transform: translateX(4px);
+}
+
+.faq-question {
+    padding: 18px 20px;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    font-size: 1.05rem;
+    cursor: pointer !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fffdf9;
+    transition: background 0.3s, color 0.3s;
+    user-select: none;
+}
+
+.faq-question:hover {
+    background: var(--card-hover);
+    color: var(--rosa-oscuro);
+}
+
+.faq-item.active .faq-question {
+    background: var(--card-hover);
+    color: var(--rosa-oscuro);
+    border-bottom: 1px dashed rgba(255, 194, 209, 0.5);
+}
+
+.faq-icon {
+    font-size: 1.2rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Rota la flecha cuando el acordeón se abre */
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    background: white;
+    color: #5a5044;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding: 0 20px;
+    font-style: italic;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Altura máxima permitida al abrirse */
+    padding: 20px;
+}
+
+/* --- REJILLA Y MENÚ DEL MÓDULO Q&A --- */
+.qya-categories-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+    .qya-categories-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets/PC */
+    }
+}
+
+.qya-cat-btn {
+    background: white;
+    border: 2px solid rgba(255, 194, 209, 0.4);
+    padding: 18px 20px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    text-align: left;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qya-cat-btn:hover {
+    border-color: var(--rosa-vibrante);
+    background: var(--card-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(255, 71, 126, 0.1);
+}
+
+/* Enlace especial de Feedback inferior */
+.feedback-link-btn {
+    display: inline-block;
+    color: var(--rosa-oscuro);
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+    padding: 12px 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 71, 126, 0.2);
+    transition: all 0.3s ease;
+}
+
+.feedback-link-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 71, 126, 0.2);
+}

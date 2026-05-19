@@ -1,0 +1,293 @@
+:root {
+    --fondo-gradiente: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+    --caja-color: #ffffff;
+    --rosa-vibrante: #ff477e;
+    --rosa-oscuro: #ff0a54;
+    --texto-oscuro: #4a5568;
+    --error-color: #e63946;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--fondo-gradiente);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden; /* Evita barras de desplazamiento raras durante las animaciones */
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    z-index: 10;
+}
+
+.login-box {
+    background: var(--caja-color);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(255, 71, 126, 0.2);
+    text-align: center;
+    border: 2px solid rgba(255, 194, 209, 0.5);
+    transition: all 0.5s ease;
+}
+
+h2 {
+    color: var(--rosa-oscuro);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: var(--texto-oscuro);
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    transition: opacity 0.3s ease;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Permite animar suavidad y movimiento */
+}
+
+/* --- CLASES DE ANIMACIÓN PARA LAS ETAPAS --- */
+.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(-20px); /* Hace que el campo suba mientras se desvanece */
+}
+
+.fade-in {
+    animation: aparecerSuave 0.5s forwards;
+}
+
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Viene desde abajo hacia su posición original */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- ESTILOS DE LOS INPUTS (IGUALES) --- */
+.input-group input {
+    width: 100%;
+    padding: 15px 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    color: var(--texto-oscuro);
+    transition: 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s;
+    background: var(--caja-color);
+    padding: 0 5px;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 0.85rem;
+    color: var(--rosa-vibrante);
+}
+
+.input-group input:focus {
+    border-color: var(--rosa-vibrante);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: var(--rosa-vibrante);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    letter-spacing: 1px;
+}
+
+button:hover { background: var(--rosa-oscuro); }
+button:active { transform: scale(0.98); }
+
+.error-msg {
+    color: var(--error-color);
+    font-size: 0.85rem;
+    margin-top: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: pre-line; /* Clave para que los saltos de línea (\n) del texto funcionen en la web */
+}
+
+/* ========================================== */
+/* ========================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente detrás del modal */
+    backdrop-filter: blur(5px); /* Desfoca la pantalla de atrás para un efecto Premium */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeInModal 0.3s forwards;
+}
+
+.modal-box {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 340px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-top: 5px solid var(--error-color); /* Línea roja de advertencia arriba */
+}
+
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.modal-box h3 {
+    color: var(--error-color);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.modal-box p {
+    color: var(--texto-oscuro);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Barra de progreso animada para simular carga del sistema antes de redirigir */
+.loading-bar {
+    width: 100%;
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: var(--error-color);
+    animation: cargarBarra 4s linear forwards; /* Tarda 4 segundos en llenarse */
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes cargarBarra {
+    to { width: 100%; }
+}
+
+/* ========================================== */
+/* SISTEMA DE LUNAS SUTILES PARA EL FONDO  */
+/* ========================================== */
+
+/* Contenedor que ocupa toda la pantalla de fondo */
+.lunas-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Hace que las lunas sean "fantasma", no bloquean clics */
+    z-index: 1; /* Quedan detrás de la tarjeta (z-index: 10) pero sobre el body */
+}
+
+/* Base geométrica para crear una luna creciente */
+.luna {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Círculo perfecto */
+    /* TRUCO: El círculo es transparente, pero su sombra (box-shadow) dibuja la silueta oscura */
+    background: transparent;
+    box-shadow: 25px 25px 0 0 rgba(255, 10, 84, 0.07); /* Usa el rosa oscuro con solo 7% de opacidad */
+    filter: blur(1px); /* Suaviza los bordes para que se fusione con el gradiente */
+}
+
+/* Luna 1: Grande, arriba a la izquierda */
+.luna-1 {
+    top: 8%;
+    left: 10%;
+    transform: rotate(-35deg); /* Rotación para darle el ángulo clásico de luna */
+}
+
+/* Luna 2: Mediana, abajo a la derecha */
+.luna-2 {
+    bottom: 12%;
+    right: 12%;
+    transform: rotate(45deg) scale(0.85); /* Un poco más pequeña gracias al scale */
+}
+
+/* Luna 3: Pequeña, al centro-izquierda */
+.luna-3 {
+    top: 55%;
+    left: 78%;
+    transform: rotate(130deg) scale(0.6); /* Más pequeña y en otro ángulo */
+}
+
+/* --- MODAL DE ACCESO EXITOSO --- */
+.modal-box.success-box {
+    border-top: 5px solid #2a9d8f; /* Línea superior verde esmeralda */
+}
+
+.modal-box.success-box h3 {
+    color: #2a9d8f;
+    letter-spacing: 2px;
+}
+
+.success-progress {
+    background: #2a9d8f;
+    animation: cargarBarra 2s linear forwards; /* Tarda 2 segundos en llenarse */
+}
+
+/* Animación de latido de corazón para el icono */
+.heartbeat {
+    animation: latido 1.2s infinite ease-in-out;
+}
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}

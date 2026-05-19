@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>L.U.N.A. - Inicio</title>
+        
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%23ffffff' stroke='%23e2e8f0' stroke-width='1'/><circle cx='34' cy='34' r='7' fill='%23cbd5e1' opacity='0.6'/><circle cx='66' cy='44' r='10' fill='%2394a3b8' opacity='0.4'/><circle cx='44' cy='66' r='8' fill='%23cbd5e1' opacity='0.6'/><circle cx='64' cy='66' r='6' fill='%2394a3b8' opacity='0.5'/></svg>">
+        
+        <link rel="stylesheet" href="css/mainStyles.css">
+    </head>
+    
+    <body>
+        <div class="lunas-background">
+            <div class="luna luna-1"></div>
+            <div class="luna luna-2"></div>
+            <div class="luna luna-3"></div>
+            
+            <div class="estrella est-1"></div>
+            <div class="estrella est-2"></div>
+            <div class="estrella est-3"></div>
+            <div class="estrella est-4"></div>
+        </div>
+
+        <div class="dashboard-container">
+            
+            <aside class="dashboard-sidebar">
+                <div class="sidebar-sticky-content">
+                    <h1>Bienvenida, mi reina 💖</h1>
+                    
+                    <p class="welcome-text">
+                        Sincronización exitosa. Este rincón lo he construido para ti con todo mi amor.
+                        <br><br>
+                        <b>¿Cómo usar L.U.N.A.?</b> ¡Es súper fácil, bb! Desliza el cursor (o toca en tu tablet) sobre cualquiera de las tarjetas de la derecha para revelar su secreto profundo. Dentro de cada una encontrarás un pedacito de nosotros.
+                        <br><br>
+                        Llevamos recorriendo este hermoso camino juntos por exactamente:
+                    </p>
+
+                    <div class="header-clock-container">
+                        <div class="counter-clock">
+                            <div class="clock-unit"><span id="calc-years">0</span><label>Años</label></div>
+                            <div class="clock-unit"><span id="calc-months">0</span><label>Meses</label></div>
+                            <div class="clock-unit"><span id="calc-days">0</span><label>Días</label></div>
+                        </div>
+                        <div class="counter-clock sub-clock">
+                            <div class="clock-unit"><span id="calc-hours">0</span><label>Horas</label></div>
+                            <div class="clock-unit"><span id="calc-minutes">0</span><label>Minutos</label></div>
+                            <div class="clock-unit"><span id="calc-seconds">0</span><label>Segundos</label></div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-footer">
+                        <button id="btn-salir" class="logout-btn">CERRAR SISTEMA 🔒</button>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="menu-grid">
+                
+                <div class="menu-card" id="btn-shakespeare" style="--bg-image: url('../assets/icons/poesia_icon.jpg');">
+                    <div class="card-normal-content">
+                        <div class="card-icon">✍️</div>
+                        <h3>Tu Shakespeare Personal</h3>
+                    </div>
+                    <div class="card-hover-content">
+                        <p class="card-description">Un espacio de letras y poesía hechas solo para tus ojos.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card" id="btn-botiquin" style="--bg-image: url('../assets/icons/botiquin_icon.jpg');">
+                    <div class="card-normal-content">
+                        <div class="card-icon">🩹</div>
+                        <h3>Botiquín Emocional</h3>
+                    </div>
+                    <div class="card-hover-content">
+                        <p class="card-description">Primeros auxilios para cuando me necesites y no pueda estar ahí.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card" id="btn-test" style="--bg-image: url('../assets/icons/test_icon.jpg');">
+                    <div class="card-normal-content">
+                        <div class="card-icon">🧠</div>
+                        <h3>Test de Coeficiente Emocional</h3>
+                    </div>
+                    <div class="card-hover-content">
+                        <p class="card-description">Evaluaciones definitivas para medir nuestro nivel de amor.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card" id="btn-preguntas" style="--bg-image: url('../assets/icons/qya_icon.jpg');">
+                    <div class="card-normal-content">
+                        <div class="card-icon">💬</div>
+                        <h3>Preguntas y Respuestas</h3>
+                    </div>
+                    <div class="card-hover-content">
+                        <p class="card-description">¿Tienes curiosidad? Entra y conóceme un poco mejor.</p>
+                    </div>
+                </div>
+
+            </main>
+
+            <section id="view-shakespeare" class="view-container hidden">
+                <div id="poetry-list-wrapper" class="view-box poetry-box">
+                    <div class="back-nav-container">
+                        <span class="view-back-icon" id="back-to-menu">⬅️ Volver al menú</span>
+                    </div>
+                    <h2>Cartas & Poemas ✍️</h2>
+                    <p class="view-subtitle">Escribe el número del poema o dale clic para empezar a leer, mi niña :3</p>
+                    
+                    <div id="dynamic-poems-list" class="poems-list-container"></div>
+                </div>
+
+                <div id="poetry-reader-wrapper" class="hidden reader-split-layout">
+                    
+                    <div class="poem-title-card">
+                        <h2 id="poem-render-title">Título del Poema</h2>
+                    </div>
+                    
+                    <div class="parchment-scroll">
+                        <p id="poem-render-text">Aquí se inyectará el poema completo...</p>
+                    </div>
+
+                    <div class="reader-footer">
+                        <button id="back-to-list" class="back-romantic-btn">⬅️ Volver a la lista</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-botiquin" class="view-container hidden">
+                <div class="view-box botiquin-box">
+                    
+                    <div id="botiquin-menu-wrapper">
+                        <div class="back-nav-container">
+                            <span class="view-back-icon" id="back-botiquin-to-menu">⬅️ Volver al menú</span>
+                        </div>
+                        <h2>Botiquín de Primeros Auxilios 🩹</h2>
+                        <p class="view-subtitle">Dime cómo te sientes hoy, mi niña... ¿Por dónde empezamos? 💖</p>
+                        
+                        <div class="moods-grid">
+                            <button class="mood-btn" data-mood="1">😢 Triste</button>
+                            <button class="mood-btn" data-mood="2">🤩 Feliz</button>
+                            <button class="mood-btn" data-mood="3">🌌 Sola</button>
+                            <button class="mood-btn" data-mood="4">😡 Enojada</button>
+                            <button class="mood-btn" data-mood="5">🤯 Estresada</button>
+                            <button class="mood-btn" data-mood="6">😰 Asustada</button>
+                            <button class="mood-btn" data-mood="7">🥱 Aburrida</button>
+                            <button class="mood-btn" data-mood="8">😐 Normal</button>
+                        </div>
+                    </div>
+
+                    <div id="botiquin-chat-wrapper" class="hidden">
+                        <div class="back-nav-container">
+                            <span class="view-back-icon" id="back-to-moods">⬅️ Cambiar ánimo</span>
+                        </div>
+                        <div class="chat-timeline" id="chat-timeline-box">
+                        </div>
+                        
+                        <div id="chat-interactive-input-zone" class="chat-input-zone hidden">
+                            <input type="text" id="game-word-input" placeholder="Escribe la palabra aquí...">
+                            <button id="btn-send-word">Pensar Palabra 🧠</button>
+                        </div>
+                        
+                        <div id="chat-game-choices" class="chat-choices-zone hidden">
+                            <button class="choice-btn yes" id="game-yes">¡SÍ! 😱</button>
+                            <button class="choice-btn no" id="game-no">Nop 😜</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="view-test" class="view-container hidden">
+                <div class="view-box test-box">
+                    
+                    <div class="trivia-particle part-1">✨</div>
+                    <div class="trivia-particle part-2">🧠</div>
+                    <div class="trivia-particle part-3">💖</div>
+                    <div class="trivia-particle part-4">✨</div>
+                    
+                    <div id="test-menu-wrapper">
+                        <div class="back-nav-container">
+                            <span class="view-back-icon" id="back-test-to-menu">⬅️ Volver al menú</span>
+                        </div>
+                        <h2>Evaluación de Coeficiente Emocional 🧠</h2>
+                        <p class="view-subtitle">Midamos nuestro nivel de conexión. Elige la prueba que deseas presentar: 🌸</p>
+                        
+                        <div class="test-categories-vertical">
+                            <button class="test-cat-btn" data-category="1">❤️ ¿Qué tanto sabes de nuestra relación?</button>
+                            <button class="test-cat-btn" data-category="2">🧔 ¿Qué tanto sabes sobre mí?</button>
+                        </div>
+                    </div>
+
+                    <div id="test-quiz-wrapper" class="hidden">
+                        <div class="back-nav-container">
+                            <span class="view-back-icon" id="btn-abort-test">⬅️ Cancelar prueba</span>
+                        </div>
+                        
+                        <div class="quiz-progress-container">
+                            <div class="quiz-progress-bar" id="quiz-progress"></div>
+                        </div>
+                        
+                        <div class="quiz-card">
+                            <span class="quiz-question-counter" id="quiz-counter">Pregunta 1 de 3</span>
+                            <h3 id="quiz-question-text">¿Aquí irá la pregunta del test?</h3>
+                            
+                            <div class="quiz-options-container" id="quiz-options-box"></div>
+                        </div>
+                    </div>
+
+                    <div id="test-results-wrapper" class="hidden score-reveal-card">
+                        <div class="result-icon" id="result-emoji">🎉</div>
+                        <h3>Resultado de la Evaluación</h3>
+                        
+                        <div class="score-circle">
+                            <span id="result-score-digits">3/3</span>
+                        </div>
+                        
+                        <p id="result-feedback-text">¡Increíble! Sabía que lo lograrías <3</p>
+                        
+                        <button id="btn-finish-test" class="back-romantic-btn" style="margin-top: 25px;">Regresar a las pruebas</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="view-preguntas" class="view-container hidden">
+                <div class="view-box faq-box">
+                    
+                    <div id="preguntas-menu-wrapper">
+                        <div class="back-nav-container">
+                            <span class="view-back-icon" id="back-preguntas-to-menu">⬅️ Volver al menú principal</span>
+                        </div>
+                        
+                        <h2>¿Nos conocemos mejor? 💬</h2>
+                        <p class="view-subtitle">A ver, sé que eres muy curiosa... Así que elige una temática, diviértete leyendo XP y luego te tocará a ti.</p>
+
+                        <div class="qya-categories-grid" id="qya-categories-box">
+                            </div>
+
+                        <div style="margin-top: 35px; border-top: 2px dashed rgba(255, 194, 209, 0.4); padding-top: 25px;">
+                            <a href="TU_ENLACE_DE_SUGERENCIAS_AQUI" target="_blank" class="feedback-link-btn">
+                                💌 ¿Quieres hacerme una pregunta nueva? ¡Déjala aquí!
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="preguntas-content-wrapper" class="hidden">
+                        <div class="back-nav-container">
+                            <span class="view-back-icon" id="back-to-qya-menu">⬅️ Volver a temáticas</span>
+                        </div>
+                        
+                        <h2 id="qya-category-title">Título Temática</h2>
+                        <p class="view-subtitle">Toca cualquiera de las preguntas para revelar el chisme completo 👀</p>
+
+                        <div class="faq-container" id="faq-list"></div>
+
+                        <div class="qya-form-container" style="margin-top: 30px;">
+                            <p style="color: var(--texto-oscuro); font-size: 0.9rem; margin-bottom: 15px; font-weight: bold;">¡Ahora es tu turno de responder, mi amor!</p>
+                            <a href="#" target="_blank" id="qya-form-link" class="back-romantic-btn" style="display: inline-block; text-decoration: none;">
+                                📝 Llenar Cuestionario de esta sección
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div id="easter-egg-modal" class="modal-overlay hidden">
+                <div class="modal-box" style="border-top: 5px solid #a855f7; max-width: 500px; position: relative;">
+                    <button id="close-easter-egg" style="position: absolute; top: 15px; right: 20px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #a855f7;">✖️</button>
+                    
+                    <div class="modal-icon heartbeat">🎵</div>
+                    <h3 style="color: #a855f7; margin-bottom: 10px;">¡CÓDIGO DESCUBIERTO!</h3>
+                    <p style="color: var(--texto-oscuro); font-size: 0.95rem; margin-bottom: 20px;">
+                        ¡Vaya, vaya, vaya... eres muy curiosa, señorita!<br>No creí que fueras a encontrar esta opción.<br>Aquí tienes tu premio: Disfruta de TU canción ✨
+                    </p>
+                    
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div id="logout-modal" class="modal-overlay hidden">
+                <div class="modal-box logout-box">
+                    <div class="modal-icon">🔒</div>
+                    <h3>CERRANDO SISTEMA</h3>
+                    <p>Cerrando sesión...<br>Reiniciando sistema...<br>Nuevas actualizaciones muy pronto; se vienen cositas :3</p>
+                    <div class="loading-bar"><div class="progress logout-progress"></div></div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="js/main.js"></script>
+        <script src="js/shakespeare.js"></script>
+        <script src="js/botiquin.js"></script>
+        <script src="js/testEq.js"></script>
+        <script src="js/preguntas.js"></script>
+    </body>
+</html>
