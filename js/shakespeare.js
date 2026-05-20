@@ -6,21 +6,64 @@
 const MIS_POEMAS = [
     { 
         id: 1, 
-        titulo: "Tu Mirada", 
-        imagen: "../assets/icons/poesia_icon.jpg",
-        texto: "Aquí va el texto completo de tu primer poema...\nEscribe con libertad, usa '\\n' si necesitas forzar un espacio manual,\naunque el CSS ya leerá tus renglones de forma nativa. ❤️" 
+        titulo: "Mi Regalo Para Ti", 
+        imagen: "../assets/fondos/MiRegaloParaTi.jpg",
+        texto: "&nbsp;&nbsp;&nbsp;&nbsp;<b>Te regalo la luna,</b><br>" +
+               "pero no la que te observa a la distancia;<br>" +
+               "te regalo la que será testigo<br>" +
+               "de nuestras más oscuras noches.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;<b>Te regalo el sol,</b><br>" +
+               "pero no el que ilumina tus días;<br>" +
+               "te regalo el que hará brillar tu piel<br>" +
+               "colándose por nuestras cortinas al rayar el alba.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo mi historia,<br>" +
+               "pero no sólo los buenos cuentos;<br>" +
+               "te regalo cada recuerdo y anécdota,<br>" +
+               "cada cicatriz sin filtro alguno.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo cada parte de mí que aún no es tuya;<br>" +
+               "<i>mi lealtad viene con el paquete.</i><br>" +
+               "No pienses en el precio o esfuerzo que le precede,<br>" +
+               "porque si es para ti sin duda lo vale;<br>" +
+               "porque verte sonreír y saber que te hago feliz,<br>" +
+               "tu alegría, hace parte de mi razón de vivir.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo interminables noches de pasión,<br>" +
+               "pero en todo el sentido de la palabra;<br>" +
+               "noches de besos y caricias picantes,<br>" +
+               "noches de sábanas desordenadas,<br>" +
+               "noches de abrazos reconfortantes,<br>" +
+               "silencios, lágrimas y profunda nostalgia.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo sueños y deseos,<br>" +
+               "te regalo mis hombros para que toques el cielo;<br>" +
+               "te regalo mis brazos como apoyo o reposo<br>" +
+               "para que tomes descanso y retomes el vuelo.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo euforia en los días locos, alegría en los días buenos,<br>" +
+               "amor infinito en los días malos<br>" +
+               "y compañía en los inciertos.<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo todo lo poco que tengo para darte<br>" +
+               "y lo mucho que algún día te daré…<br><br>" +
+
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo este poema y todos los otros que te escribiré después…<br><br>" +
+               "<hr style='border:none; border-top:1px dashed #c9b68d; margin:15px 0;'>" + // Una línea punteada tierno estilo pergamino
+               "<div style='text-align: right;'><small><i>-- 19 de mayo de 2026<br>-- De tu amado</i></small></div>"
     },
     { 
         id: 2, 
         titulo: "Mi Lugar Seguro", 
         imagen: "../assets/icons/poesia_icon.jpg",
-        texto: "Texto de tu segundo poema...\n\nCada línea que escribas aquí se renderizará de forma hermosa en el papel digital marfil." 
+        texto: "Texto de tu segundo poema...<br><br>Cada línea que escribas aquí se renderizará de forma hermosa en el papel digital marfil." 
     },
     { 
         id: 3, 
         titulo: "El Secreto", 
         imagen: "../assets/icons/poesia_icon.jpg",
-        texto: "Milton, de acuerdo con tu algoritmo base (.psc),\naquí puedes esconder la PRIMERA PISTA crucial\npara que ella deduzca el código de la opción oculta (020226). 😉" //
+        texto: "Milton, de acuerdo con tu algoritmo base (.psc),<br>aquí puedes esconder la PRIMERA PISTA crucial<br>para que ella deduzca el código de la opción oculta (020226). 😉" //
     },
     { 
         id: 4, 
@@ -107,5 +150,5 @@ function openPoemReader(poema) {
     readerWrapper.classList.add('fade-in'); // Suaviza la transición lista -> lector
     
     renderTitle.innerText = poema.titulo;         
-    renderText.innerText = poema.texto;           
+    renderText.innerHTML = poema.texto;           
 }
