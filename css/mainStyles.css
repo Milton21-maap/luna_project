@@ -38,6 +38,7 @@ body, .dashboard-sidebar, .view-box, .clock-unit, .test-cat-btn, .quiz-opt-btn {
 body {
     background: var(--fondo-gradiente); min-height: 100vh;
     padding: 30px 20px; display: flex; justify-content: center; align-items: center;
+    overflow-x: hidden;
 }
 
 .hidden { display: none !important; }
