@@ -107,8 +107,13 @@ const triggerHuevo = document.getElementById('trigger-huevo');
 const inputFantasma = document.getElementById('input-huevo-fantasma');
 
 // Cuando toque el corazón en la tablet, invocamos el teclado virtual
-triggerHuevo.addEventListener('click', () => {
-    inputFantasma.focus();
+triggerHuevo.addEventListener('click', (e) => {
+    e.preventDefault(); // Evita cualquier salto raro en el navegador móvil
+    inputFantasma.value = ""; // Limpiamos cualquier residuo previo
+    // Un mini retardo de 50 milisegundos asegura que el sistema operativo procese la acción táctil
+    setTimeout(() => {
+        inputFantasma.focus();
+    }, 50);
 });
 
 // Escuchamos lo que digita dentro del input fantasma
