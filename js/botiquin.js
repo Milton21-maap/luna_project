@@ -197,7 +197,7 @@ document.getElementById('game-no').addEventListener('click', () => {
 function concluirJuegoNormal() {
     let tConcluir = setTimeout(() => {
         imprimirMensajeChat("Pero bueno... Espero haberte sacado una sonrisa. XP", 0);
-        imprimirMensajeChat("💡 [PISTA DEL ACERTIJO]: Aquí inyectarás la segunda pista oculta de tu juego secreto.", 1500);
+        imprimirMensajeChat("💬 <b>[MENSAJE CIFRADO DEL SISTEMA]:</b> He dejado un canal oculto en la matriz. Cuando el LATIDO despierte el teclado, no busques palabras... <i>debes digitar el código numérico de acceso</i> para liberar la melodía oculta...", 1500)
     }, 4500);
     botiquinTimeouts.push(tConcluir);
 }

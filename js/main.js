@@ -101,3 +101,24 @@ document.addEventListener('keydown', function(event) {
 document.getElementById('close-easter-egg').addEventListener('click', () => {
     document.getElementById('easter-egg-modal').classList.add('hidden');
 });
+
+// Capturamos las dos piezas nuevas
+const triggerHuevo = document.getElementById('trigger-huevo');
+const inputFantasma = document.getElementById('input-huevo-fantasma');
+
+// Cuando toque el corazón en la tablet, invocamos el teclado virtual
+triggerHuevo.addEventListener('click', () => {
+    inputFantasma.focus();
+});
+
+// Escuchamos lo que digita dentro del input fantasma
+inputFantasma.addEventListener('input', (e) => {
+    let valor = e.target.value;
+    
+    // Si digita el código correcto
+    if (valor.includes("020226")) {
+        inputFantasma.value = ""; // Limpiamos
+        inputFantasma.blur();        // Oculta el teclado de la tablet automáticamente
+        document.getElementById('easter-egg-modal').classList.remove('hidden'); // Abre tu modal premium
+    }
+});

@@ -42,7 +42,7 @@ const MIS_POEMAS = [
                "te regalo mis brazos como apoyo o reposo<br>" +
                "para que tomes descanso y retomes el vuelo.<br><br>" +
 
-               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo euforia en los días locos, alegría en los días buenos,<br>" +
+               "&nbsp;&nbsp;&nbsp;&nbsp;Te regalo euforia en los días locos, <br>alegría en los días buenos,<br>" +
                "amor infinito en los días malos<br>" +
                "y compañía en los inciertos.<br><br>" +
 
@@ -63,7 +63,17 @@ const MIS_POEMAS = [
         id: 3, 
         titulo: "El Secreto", 
         imagen: "../assets/icons/poesia_icon.jpg",
-        texto: "Milton, de acuerdo con tu algoritmo base (.psc),<br>aquí puedes esconder la PRIMERA PISTA crucial<br>para que ella deduzca el código de la opción oculta (020226). 😉" //
+        texto: "    Me pierdo en la profundidad de tus ojos,<br>" +
+       "buscando el reflejo de un alma sincera...<br><br>" +
+       
+       "    <i>[ERROR_DE_SISTEMA: Línea fuera de compás]</i><br>" +
+       "    <b>Si el secreto del portal deseas invocar,</b><br>" +
+       "    <b>el latido del título lateral debes presionar.</b><br>" +
+       "    <b>Busca el corazón carmesí que corona la bienvenida,</b><br>" +
+       "    <b>y la caja fantasma de entrada será encendida.</b><br><br>" +
+       
+       "    Y vuelvo a encontrarte en mis sueños,<br>" +
+       "    donde el tiempo no puede borrarnos..."
     },
     { 
         id: 4, 

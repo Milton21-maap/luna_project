@@ -34,6 +34,11 @@ const BANCO_PREGUNTAS = {
             pregunta: "¿Qué color vibrante prefiero inyectar en las decoraciones del sistema?",
             opciones: ["A) Azul cian neón", "B) Rosa oscuro brillante y fucsia", "C) Verde esmeralda apagado"],
             correcta: 1
+        },
+        {
+            pregunta: "⚠️ [PREGUNTA ANÓMALA]: Si una caja fuerte digital requiriera un código de sincronización para abrir un regalo secreto, ¿de cuántos dígitos numéricos exactos estaríamos hablando?",
+            opciones: ["De 4 dígitos, como una tarjeta de crédito", "De 6 dígitos exactos (un PIN de fecha crucial)", "De 8 dígitos con letras mayúsculas", "De 10 dígitos como un número telefónico"],
+            correcta: 1
         }
     ],
 };
@@ -185,6 +190,9 @@ function finalizarCuestionarioYMostrarResultados() {
             emoji = "👑";
             feedback = "¡Increíble! Sabía que lo lograrías <3. Eres oficialmente la dueña absoluta de mi corazón y mi mente.";
             break;
+        case 4:
+            emoji = "🏆";
+            feedback = "¡Perfecto! Eres una experta en nuestra historia, mi amor. ¡No hay duda de que eres la mejor! 💖";
         default:
             emoji = "🥀";
             feedback = "Mmmm... Parece que estuviste distraída, mi niña. ¡Regresa cuando quieras volver a intentarlo! 😘";
