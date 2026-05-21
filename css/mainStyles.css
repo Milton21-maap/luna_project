@@ -39,6 +39,7 @@ body {
     background: var(--fondo-gradiente); min-height: 100vh;
     padding: 30px 20px; display: flex; justify-content: center; align-items: center;
     overflow-x: hidden;
+    max-width: 100vw;
 }
 
 .hidden { display: none !important; }
