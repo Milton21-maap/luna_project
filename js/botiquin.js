@@ -1,59 +1,101 @@
 // ==========================================
-// BASE DE DATOS DE DIÁLOGOS EMOCIONALES
+// BASE DE DATOS DE DIÁLOGOS EMOCIONALES (NUEVO MOTOR JSON)
 // ==========================================
-const DIALOGOS_BOTIQUIN = {
-    1: [
-        "Ay, mi niña linda...",
-        "Me gustaría abrazarte suavemente y en silencio...",
-        "¿Estás sola? De ser así, llora con libertad, princesa...",
-        "Está bien estar mal. ❤️",
-        "<div style='position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin-top:10px; border: 2px solid var(--rosa-vibrante);'><iframe style='position:absolute; top:0; left:0; width:100%; height:100%; border:none;' src='https://www.youtube.com/embed/dQw4w9WgXcQ' allowfullscreen></iframe></div>"
-    ],
-    2: [
-        "¡Oh, cielos! 🌟",
-        "Me encantaría saber a qué se debe esa alegría, mi amor :3",
-        "Me temo que no puedo saberlo ahora mismo (a menos de que me lo cuentes)...",
-        "Pero eso no significa que no comparta tu alegría, mi amor.",
-        "Espero que la sigas pasando súper hoy; no dejes que nadie apague tu brillo. ✨",
-        "🎁 [RECURSO MULTIMEDIA]: Aquí colocarás tu GIF bailando con memes."
-    ],
-    3: [
-        "Bueno...",
-        "Creo que en parte tengo culpa de que te sientas así, mi niña... Lo siento. 😔",
-        "Pero, hey; no estás del todo sola.",
-        "En cuanto decidas o puedas volver a mis brazos, estaré allí para recibirte con alegría y cariño. 🌹",
-        "<img src='assets/fotos/imagen_prueba.png' style='width:100%; border-radius:12px; margin-top:10px; box-shadow:0 6px 15px rgba(0,0,0,0.08); border: 1px solid #edf2f7;'>"
-    ],
-    4: [
-        "Ou... Creo que no es el mejor momento para estar aquí...",
-        "Pero, ahora que me fijo...",
-        "Eres una cosita muy tierna y adorable estando enojada. 😡❤️",
-        "Me encantaría ayudarte a controlar tu enojo, pero es algo difícil en este mismo instante, preciosura.",
-        "Sólo, no olvides quién es la niña hermosa de papi. 🥰",
-        "🎁 [RECURSO MULTIMEDIA]: Aquí puedes adjuntar una pendejada graciosa tuya para calmar su genio."
-    ],
-    5: [
-        "Mmmm... Te están presionando mucho hoy, ¿no?",
-        "Quizás el día parece eterno...",
-        "¿Te parece si nos tomamos 5 minutos, mi reina?",
-        "Quisiera que te tomaras un pequeño descanso, mi niña. 💆‍♀️",
-        "🎁 [RECURSO MULTIMEDIA]: Aquí colocarás tu video tutorial con 'hacks' para estudiar/quehaceres."
-    ],
-    6: [
-        "Vaya... No sé cómo ayudarte en este tipo de casos, mi niña.",
-        "Eres la mujer más valiente que conozco. :P",
-        "Apuesto a que, en tus zapatos, yo estaría cagado. :v",
-        "Ya sé, dicen que la risa es la mejor medicina. :3",
-        "¿Qué tal un par de chistes malos y pendejadas de mi autoría para alivianar la tensión? XD",
-        "<video src='assets/videos/video_prueba.mp4' controls style='width:100%; border-radius:12px; margin-top:10px; border: 2px solid rgba(255, 194, 209, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.05);'></video>"
-    ],
-    7: [
-        "Estás aburrida, ¿eh? :P",
-        "Bueno, eso es algo que se puede solucionar fácilmente, mi niña linda. :3",
-        "Te gusta leer, ¿no?",
-        "Escribí esto justo para ti... Ojalá te guste",
-        "<a href='assets/descargables/Memorias del Arma Divina.pdf' download='Memorias_del_Arma_Divina.pdf' class='back-romantic-btn' style='display:block; text-decoration:none; margin-top:10px;'>📖 Descarga tu cuento.pdf</a>"
-    ]
+const CHATS_BOTIQUIN = {
+    1: { // TRISTE (Guion Interactivo con Opciones y Dibujo)
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "Ay, mi niña linda..." },
+            { tipo: "texto", contenido: "Debes estar en tu límite para admitir que te sientes mal, bb." },
+            { tipo: "texto", contenido: "Eres muy fuerte, incluso cuando no tienes necesidad de serlo." },
+            { tipo: "texto", contenido: "¿Estás sola?" },
+            { tipo: "opciones", opciones: [
+                { texto: "Sí...", idBoton: "game-yes" }, 
+                { texto: "No...", idBoton: "game-no" }
+            ]}
+        ],
+        rutasCondicionales: {
+            "game-yes": [
+                { tipo: "texto", contenido: "Vale, eso es bueno." },
+                { tipo: "texto", contenido: "Tienes la libertad de gritar, llorar y liberar lo que sientes sin que te moleste tu mamá o cualquier otro metiche." },
+                { tipo: "texto", contenido: "Está bien estar mal, cosita." },
+                { tipo: "texto", contenido: "Nadie puede culparte por sentirte mal; es normal en todos, dulzura." }
+            ],
+            "game-no": [
+                { tipo: "texto", contenido: "Oh, entiendo..." },
+                { tipo: "texto", contenido: "Está bien, mi amor." },
+                { tipo: "texto", contenido: "Yo estoy aquí contigo." },
+                { tipo: "texto", contenido: "No estás sola, princesa." },
+                { tipo: "texto", contenido: "Te amo mucho, Harli. Lo sabes, y no lo olvides jamás." }
+            ]
+        },
+        secuenciaFinal: [
+            { tipo: "texto", contenido: "Quizás te haga falta pasar un momento a solas." },
+            { tipo: "texto", contenido: "O un pequeño detalle puede ayudar también..." },
+            { tipo: "texto", contenido: "Qué tal uno de esos que te gustan tanto..." },
+            { tipo: "texto", contenido: "¡Exacto! Un dibujo/carta :D" },
+            { tipo: "imagen", contenido: "assets/fotos/Dibujos/Triste.jpeg" }, // Tu dibujo del Cisne
+            { tipo: "texto", contenido: "La hice justo para ti, mi amor; espero que te guste. Ojalá te haya podido ayudar un poco con esto." },
+            { tipo: "texto", contenido: "Si no fue así, sé que pasar un rato sola con tus hobbies te va a ayudar mucho :3" },
+            { tipo: "texto", contenido: "Nadie morirá si te escapas por 5 minutos O.O" }
+        ]
+    },
+    2: { // FELIZ
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "¡Oh, cielos! 🌟" },
+            { tipo: "texto", contenido: "Me encantaría saber a qué se debe esa alegría, mi amor :3" },
+            { tipo: "texto", contenido: "Me temo que no puedo saberlo ahora mismo (a menos de que me lo cuentes)..." },
+            { tipo: "texto", contenido: "Pero eso no significa que no comparta tu alegría, mi amor." },
+            { tipo: "texto", contenido: "Espero que la sigas pasando súper hoy; no dejes que nadie apague tu brillo. ✨" },
+            { tipo: "texto", contenido: "🎁 [RECURSO MULTIMEDIA]: Aquí colocarás tu GIF bailando con memes." }
+        ]
+    },
+    3: { // SOLA
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "Bueno..." },
+            { tipo: "texto", contenido: "Creo que en parte tengo culpa de que te sientas así, mi niña... Lo siento. 😔" },
+            { tipo: "texto", contenido: "Pero, hey; no estás del todo sola." },
+            { tipo: "texto", contenido: "En cuanto decidas o puedas volver a mis brazos, estaré allí para recibirte con alegría y cariño. 🌹" },
+            { tipo: "imagen", contenido: "assets/fotos/imagen_prueba.png" }
+        ]
+    },
+    4: { // ENOJADA
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "Ou... Creo que no es el mejor momento para estar aquí..." },
+            { tipo: "texto", contenido: "Pero, ahora que me fijo..." },
+            { tipo: "texto", contenido: "Eres una cosita muy tierna y adorable estando enojada. 😡❤️" },
+            { tipo: "texto", contenido: "Me encantaría ayudarte a controlar tu enojo, pero es algo difícil en este mismo instante, preciosura." },
+            { tipo: "texto", contenido: "Sólo, no olvides quién es la niña hermosa de papi. 🥰" },
+            { tipo: "texto", contenido: "🎁 [RECURSO MULTIMEDIA]: Aquí puedes adjuntar una pendejada graciosa tuya para calmar su genio." }
+        ]
+    },
+    5: { // ESTRESADA
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "Mmmm... Te están presionando mucho hoy, ¿no?" },
+            { tipo: "texto", contenido: "Quizás el día parece eterno..." },
+            { tipo: "texto", contenido: "¿Te parece si nos tomamos 5 minutos, mi reina?" },
+            { tipo: "texto", contenido: "Quisiera que te tomaras un pequeño descanso, mi niña. 💆‍♀️" },
+            { tipo: "texto", contenido: "🎁 [RECURSO MULTIMEDIA]: Aquí colocarás tu video tutorial con 'hacks' para estudiar/quehaceres." }
+        ]
+    },
+    6: { // ASUSTADA
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "Vaya... No sé cómo ayudarte en este tipo de casos, mi niña." },
+            { tipo: "texto", contenido: "Eres la mujer más valiente que conozco. :P" },
+            { tipo: "texto", contenido: "Apuesto a que, en tus zapatos, yo estaría cagado. :v" },
+            { tipo: "texto", contenido: "Ya sé, dicen que la risa es la mejor medicina. :3" },
+            { tipo: "texto", contenido: "¿Qué tal un par de chistes malos y pendejadas de mi autoría para alivianar la tensión? XD" },
+            { tipo: "video", contenido: "assets/videos/video_prueba.mp4" }
+        ]
+    },
+    7: { // ABURRIDA
+        secuenciaInicial: [
+            { tipo: "texto", contenido: "Estás aburrida, ¿eh? :P" },
+            { tipo: "texto", contenido: "Bueno, eso es algo que se puede solucionar fácilmente, mi niña linda. :3" },
+            { tipo: "texto", contenido: "Te gusta leer, ¿no?" },
+            { tipo: "texto", contenido: "Escribí esto justo para ti... Ojalá te guste" },
+            { tipo: "descargable", url: "assets/descargables/Memorias del Arma Divina.pdf", nombre: "📖 Descarga tu cuento.pdf" }
+        ]
+    }
 };
 
 // CONTROLES DOM
@@ -70,7 +112,7 @@ const choicesZone = document.getElementById('chat-game-choices');
 const wordInput = document.getElementById('game-word-input');
 let palabraPensada = ""; 
 
-// MEMORIA INTERNA: Guarda los identificadores de los hilos de tiempo activos
+// MEMORIA INTERNA
 let botiquinTimeouts = [];
 
 // NAVEGACIÓN CENTRAL
@@ -92,16 +134,15 @@ document.getElementById('back-to-moods').addEventListener('click', () => {
     resetBotiquinView();
 });
 
-// FUNCIÓN DE REINICIO SEGURO (ANIQUILA DUENDES ASÍNCRONOS)
+// FUNCIÓN DE REINICIO SEGURO
 function resetBotiquinView() {
-    // Comando Maestro: Mata de raíz cualquier temporizador activo del chat anterior
     botiquinTimeouts.forEach(id => clearTimeout(id));
-    botiquinTimeouts = []; // Vaciamos la lista de control
+    botiquinTimeouts = []; 
     
     chatWrapper.classList.add('hidden');
     menuWrapper.classList.remove('hidden');
     menuWrapper.classList.add('fade-in');
-    timelineBox.innerHTML = ""; // Vacía las burbujas físicas de la pantalla
+    timelineBox.innerHTML = ""; 
     inputZone.classList.add('hidden');
     choicesZone.classList.add('hidden');
     wordInput.value = "";
@@ -115,46 +156,109 @@ document.querySelectorAll('.mood-btn').forEach(button => {
         chatWrapper.classList.remove('hidden');
         chatWrapper.classList.add('fade-in');
         
-        // Arranca de forma inmediata eliminando los textos introductorios globales redundantes
         if (moodId === 8) {
             arrancarMinijuegoNormal();
         } else {
-            procesarFlujoDialogos(DIALOGOS_BOTIQUIN[moodId]);
+            // Arranca el nuevo motor JSON con la secuencia inicial
+            procesarSecuencia(CHATS_BOTIQUIN[moodId].secuenciaInicial, moodId);
         }
     });
 });
 
-// IMPRESORA DE BURBUJAS ASÍNCRONA REGISTRADA
-function imprimirMensajeChat(texto, retraso, esRegalo = false) {
-    // Guardamos la ejecución en una variable interna
-    let timeoutId = setTimeout(() => {
-        const bubble = document.createElement('div');
-        bubble.className = esRegalo ? "chat-media-container" : "chat-bubble";
-        bubble.innerHTML = texto;
-        timelineBox.appendChild(bubble);
-        timelineBox.scrollTop = timelineBox.scrollHeight; // Auto-scroll dinámico
-    }, retraso);
+// ==========================================
+// NUEVO MOTOR DE CHAT SECUENCIAL INTELIGENTE
+// ==========================================
+function procesarSecuencia(secuencia, moodIdContexto = null, callbackTermino = null) {
+    let indice = 0;
     
-    // Registramos el ID en nuestra lista de control de seguridad
-    botiquinTimeouts.push(timeoutId);
+    function siguienteMensaje() {
+        if (indice >= secuencia.length) {
+            // Si la secuencia terminó y existe un callback, lo ejecuta (útil para unir secuencias condicionales con la final)
+            if (callbackTermino) callbackTermino();
+            return; 
+        }
+        
+        const msg = secuencia[indice];
+        
+        // Si es una pregunta con opciones, PAUSA el bucle y dibuja los botones
+        if (msg.tipo === "opciones") {
+            dibujarOpcionesDinamicas(msg.opciones, moodIdContexto);
+            return; // Se detiene la recursividad hasta que ella haga clic
+        }
+        
+        // Renderizado visual según el tipo de objeto
+        if (msg.tipo === "texto") {
+            imprimirBurbujaDinamica(msg.contenido, "chat-bubble");
+        } else if (msg.tipo === "imagen") {
+            imprimirBurbujaDinamica(`<img src='${msg.contenido}' style='width:100%; border-radius:12px; margin-top:10px; box-shadow:0 6px 15px rgba(0,0,0,0.08); border: 1px solid #edf2f7;'>`, "chat-media-container");
+        } else if (msg.tipo === "video") {
+            imprimirBurbujaDinamica(`<video src='${msg.contenido}' controls style='width:100%; border-radius:12px; margin-top:10px; border: 2px solid rgba(255, 194, 209, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.05);'></video>`, "chat-media-container");
+        } else if (msg.tipo === "descargable") {
+            imprimirBurbujaDinamica(`<a href='${msg.url}' download class='back-romantic-btn' style='display:block; text-decoration:none; margin-top:10px;'>${msg.nombre}</a>`, "chat-media-container");
+        }
+        
+        indice++;
+        
+        // Los multimedia cargan rápido (800ms), los textos se toman su tiempo para leer (1800ms)
+        let espera = (msg.tipo === "texto") ? 1800 : 800;
+        let tId = setTimeout(siguienteMensaje, espera);
+        botiquinTimeouts.push(tId);
+    }
+    
+    siguienteMensaje(); // Arranca el motor
 }
 
-// PROCESADOR EN CADENA CON MARGEN DE TIEMPO COHERENTE (1.8 SEGUNDOS)
-function procesarFlujoDialogos(arregloLineas) {
-    let tiempoAcumulado = 0;
-    arregloLineas.forEach((linea, indice) => {
-        const esElUltimoElemento = indice === arregloLineas.length - 1;
-        imprimirMensajeChat(linea, tiempoAcumulado, esElUltimoElemento);
-        tiempoAcumulado += 1800; // Simulación perfecta de ritmo de escritura natural humana
+// INYECTOR DE BOTONES EN EL CHAT
+function dibujarOpcionesDinamicas(opciones, moodIdContexto) {
+    const cajaBotones = document.createElement('div');
+    cajaBotones.className = "chat-choices-zone fade-in";
+    cajaBotones.style.display = "flex";
+    cajaBotones.style.marginTop = "15px";
+    
+    opciones.forEach(opt => {
+        const btn = document.createElement('button');
+        // Reutilizamos tus clases "yes" y "no" para el CSS (Verde y Rojo)
+        btn.className = (opt.idBoton === "game-yes") ? "choice-btn yes" : "choice-btn no"; 
+        if(!btn.className.includes("yes") && !btn.className.includes("no")) btn.className = "choice-btn yes"; 
+        
+        btn.innerText = opt.texto;
+        btn.onclick = () => {
+            cajaBotones.remove(); // Desaparecen los botones al dar clic
+            
+            // Busca la ruta que eligió
+            let rutaElegida = CHATS_BOTIQUIN[moodIdContexto].rutasCondicionales[opt.idBoton];
+            if (rutaElegida) {
+                // Ejecuta la ruta elegida y, al terminar, enlaza con la secuencia final universal
+                procesarSecuencia(rutaElegida, null, () => {
+                    procesarSecuencia(CHATS_BOTIQUIN[moodIdContexto].secuenciaFinal, null, null);
+                });
+            }
+        };
+        cajaBotones.appendChild(btn);
     });
+    
+    timelineBox.appendChild(cajaBotones);
+    timelineBox.scrollTop = timelineBox.scrollHeight;
+}
+
+// IMPRESORA FÍSICA PARA EL MOTOR NUEVO
+function imprimirBurbujaDinamica(htmlContent, claseCSS) {
+    const bubble = document.createElement('div');
+    bubble.className = claseCSS;
+    bubble.innerHTML = htmlContent;
+    bubble.style.animation = "aparecerSuave 0.4s forwards";
+    timelineBox.appendChild(bubble);
+    timelineBox.scrollTop = timelineBox.scrollHeight;
 }
 
 // ==========================================
-// MÓDULO INTERACTIVO: JUEGO OPCIÓN "NORMAL" (8)
+// MÓDULO INTERACTIVO LEGACY: JUEGO OPCIÓN "NORMAL" (8)
 // ==========================================
+// (Se mantiene intacto usando su impresora original para no alterar tu lógica)
+
 function arrancarMinijuegoNormal() {
-    imprimirMensajeChat("Oh, ya veo... Bueno, pos, juguemos algo. :3", 0);
-    imprimirMensajeChat("Piensa en una palabra y escríbela aquí abajo, yo la adivinaré >:3", 1500);
+    imprimirMensajeChatLegacy("Oh, ya veo... Bueno, pos, juguemos algo. :3", 0);
+    imprimirMensajeChatLegacy("Piensa en una palabra y escríbela aquí abajo, yo la adivinaré >:3", 1500);
     
     let tInput = setTimeout(() => {
         inputZone.classList.remove('hidden'); 
@@ -168,10 +272,10 @@ document.getElementById('btn-send-word').addEventListener('click', () => {
     
     inputZone.classList.add('hidden'); 
     
-    imprimirMensajeChat(`(Pensando en: "${palabraPensada}")`, 0);
-    imprimirMensajeChat("Bien... procesando tu mente...", 1200);
-    imprimirMensajeChat("Tu palabra es...", 2800);
-    imprimirMensajeChat("¿¡Tangamandapio :v!?", 4500);
+    imprimirMensajeChatLegacy(`(Pensando en: "${palabraPensada}")`, 0);
+    imprimirMensajeChatLegacy("Bien... procesando tu mente...", 1200);
+    imprimirMensajeChatLegacy("Tu palabra es...", 2800);
+    imprimirMensajeChatLegacy("¿¡Tangamandapio :v!?", 4500);
     
     let tChoices = setTimeout(() => {
         choicesZone.classList.remove('hidden'); 
@@ -181,23 +285,35 @@ document.getElementById('btn-send-word').addEventListener('click', () => {
 
 document.getElementById('game-yes').addEventListener('click', () => {
     choicesZone.classList.add('hidden');
-    imprimirMensajeChat("¡Ala! 😱 ¡Adiviné! :3", 0);
-    imprimirMensajeChat(`Por un momento llegué a pensar que tu palabra de verdad era "${palabraPensada}"... ¡Qué coincidencia! :v`, 1500);
+    imprimirMensajeChatLegacy("¡Ala! 😱 ¡Adiviné! :3", 0);
+    imprimirMensajeChatLegacy(`Por un momento llegué a pensar que tu palabra de verdad era "${palabraPensada}"... ¡Qué coincidencia! :v`, 1500);
     concluirJuegoNormal();
 });
 
 document.getElementById('game-no').addEventListener('click', () => {
     choicesZone.classList.add('hidden');
-    imprimirMensajeChat("Chale. :/", 0);
-    imprimirMensajeChat("Soy malísimo en esto...", 1200);
-    imprimirMensajeChat(`Sabía que debí haber dicho "${palabraPensada}" desde el principio... ¡Estaba en mi mente!`, 2500);
+    imprimirMensajeChatLegacy("Chale. :/", 0);
+    imprimirMensajeChatLegacy("Soy malísimo en esto...", 1200);
+    imprimirMensajeChatLegacy(`Sabía que debí haber dicho "${palabraPensada}" desde el principio... ¡Estaba en mi mente!`, 2500);
     concluirJuegoNormal();
 });
 
 function concluirJuegoNormal() {
     let tConcluir = setTimeout(() => {
-        imprimirMensajeChat("Pero bueno... Espero haberte sacado una sonrisa. XP", 0);
-        imprimirMensajeChat("💬 <b>[MENSAJE CIFRADO DEL SISTEMA]:</b> He dejado un canal oculto en la matriz. Cuando el LATIDO despierte el teclado, no busques palabras... <i>debes digitar el código numérico de acceso</i> para liberar la melodía oculta...", 1500)
+        imprimirMensajeChatLegacy("Pero bueno... Espero haberte sacado una sonrisa. XP", 0);
+        imprimirMensajeChatLegacy("💬 <b>[MENSAJE CIFRADO DEL SISTEMA]:</b> He dejado un canal oculto en la matriz. Cuando el LATIDO despierte el teclado, no busques palabras... <i>debes digitar el código numérico de acceso</i> para liberar la melodía oculta...", 1500)
     }, 4500);
     botiquinTimeouts.push(tConcluir);
+}
+
+// Impresora original para que el minijuego no se rompa
+function imprimirMensajeChatLegacy(texto, retraso, esRegalo = false) {
+    let timeoutId = setTimeout(() => {
+        const bubble = document.createElement('div');
+        bubble.className = esRegalo ? "chat-media-container" : "chat-bubble";
+        bubble.innerHTML = texto;
+        timelineBox.appendChild(bubble);
+        timelineBox.scrollTop = timelineBox.scrollHeight; 
+    }, retraso);
+    botiquinTimeouts.push(timeoutId);
 }
