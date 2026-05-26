@@ -41,12 +41,56 @@ const CHATS_BOTIQUIN = {
     },
     2: { // FELIZ
         secuenciaInicial: [
-            { tipo: "texto", contenido: "¡Oh, cielos! 🌟" },
-            { tipo: "texto", contenido: "Me encantaría saber a qué se debe esa alegría, mi amor :3" },
-            { tipo: "texto", contenido: "Me temo que no puedo saberlo ahora mismo (a menos de que me lo cuentes)..." },
-            { tipo: "texto", contenido: "Pero eso no significa que no comparta tu alegría, mi amor." },
-            { tipo: "texto", contenido: "Espero que la sigas pasando súper hoy; no dejes que nadie apague tu brillo. ✨" },
-            { tipo: "texto", contenido: "🎁 [RECURSO MULTIMEDIA]: Aquí colocarás tu GIF bailando con memes." }
+            { tipo: "texto", contenido: "Alaaaa :O" },
+            { tipo: "texto", contenido: "Parece que alguien hoy está alegre :3" },
+            { tipo: "texto", contenido: "Eso me hace muy feliz a mí también <3" },
+            { tipo: "texto", contenido: "Me encantaría saber qué es lo que te hace tan feliz..." },
+            { tipo: "opciones", opciones: [
+                { texto: "🍔 Estoy comiendo", idBoton: "game-comiendo" },
+                { texto: "✨ Pasó algo bueno", idBoton: "game-bueno" },
+                { texto: "💸 Tengo dinero", idBoton: "game-dinero" },
+                { texto: "🎁 Me dieron un regalo", idBoton: "game-regalo" },
+                { texto: "😶 Otro", idBoton: "game-otro" }
+            ]}
+        ],
+        rutasCondicionales: {
+            "game-comiendo": [
+                { tipo: "texto", contenido: "Oh, ya veo :3" },
+                { tipo: "texto", contenido: "Sé que no me darás de tu comida, así que mejor no te pido XD" },
+                { tipo: "texto", contenido: "Disfrútalo, mi niña; buen provecho." },
+                { tipo: "texto", contenido: "Luego me cuentas qué comes, vale?" }
+            ],
+            "game-bueno": [
+                { tipo: "texto", contenido: "Interesante :OOO" },
+                { tipo: "texto", contenido: "Si eso te hace feliz, sea lo que sea, a mí me hace feliz, dulzura" },
+                { tipo: "texto", contenido: "No olvides qué es para que al rato me cuentes, va?" }
+            ],
+            "game-dinero": [
+                { tipo: "texto", contenido: "Jajajaja, está bien." },
+                { tipo: "texto", contenido: "Si fue un regalo, o si lo ganaste trabajando; de cualquier manera disfrútalo ;3" },
+                { tipo: "texto", contenido: "Lo mereces, bb" },
+                { tipo: "texto", contenido: "Felicidad :3" }
+            ],
+            "game-regalo": [
+                { tipo: "texto", contenido: "Oh, entiendo" },
+                { tipo: "texto", contenido: "Mmmmmmm..." },
+                { tipo: "texto", contenido: "Ahora quiero saber qué es >:v" },
+                { tipo: "texto", contenido: "Pero bueno, luego me cuentas qué es, sí?" }
+            ],
+            "game-otro": [
+                { tipo: "texto", contenido: "Hmmm, entonces se trata de otra cosa :v" },
+                { tipo: "texto", contenido: "Está bien :3" },
+                { tipo: "texto", contenido: "Sea lo que sea de lo que se trate, quiero que sepas que me alegra mucho que estés feliz :3" },
+                { tipo: "texto", contenido: "Y que espero que me cuentes el chisme en cuanto puedas :v" },
+                { tipo: "texto", contenido: "Que no sepa lo que es no significa que no me interese o que no comparta tu alegría, mi vida." }
+            ]
+        },
+        secuenciaFinal: [
+            { tipo: "texto", contenido: "Ojalá la sigas pasando súper hoy" },
+            { tipo: "texto", contenido: "No dejes que nada ni nadie arruine tu alegría, mi niña" },
+            { tipo: "texto", contenido: "Te amo mucho; ten un día maravilloso, cariño <3" },
+            // Aquí enlazamos tu futuro video bailando (ajusta la ruta y el nombre cuando lo grabes)
+            { tipo: "video", contenido: "assets/videos/FelizVideo.mp4" } 
         ]
     },
     3: { // SOLA
@@ -212,26 +256,35 @@ function procesarSecuencia(secuencia, moodIdContexto = null, callbackTermino = n
 function dibujarOpcionesDinamicas(opciones, moodIdContexto) {
     const cajaBotones = document.createElement('div');
     cajaBotones.className = "chat-choices-zone fade-in";
-    cajaBotones.style.display = "flex";
-    cajaBotones.style.marginTop = "15px";
     
     opciones.forEach(opt => {
         const btn = document.createElement('button');
-        // Reutilizamos tus clases "yes" y "no" para el CSS (Verde y Rojo)
-        btn.className = (opt.idBoton === "game-yes") ? "choice-btn yes" : "choice-btn no"; 
-        if(!btn.className.includes("yes") && !btn.className.includes("no")) btn.className = "choice-btn yes"; 
+        
+        // Usamos la nueva clase pastel por defecto
+        btn.className = "choice-btn chat-opt-btn"; 
+        
+        // Mantenemos a salvo los colores del minijuego de Tangamandapio
+        if (opt.idBoton === "game-yes") btn.className = "choice-btn yes";
+        if (opt.idBoton === "game-no") btn.className = "choice-btn no";
         
         btn.innerText = opt.texto;
+        
         btn.onclick = () => {
             cajaBotones.remove(); // Desaparecen los botones al dar clic
+            
+            // Inyectamos su selección como un mensaje enviado por ella
+            imprimirBurbujaDinamica(opt.texto, "chat-bubble user-reply");
             
             // Busca la ruta que eligió
             let rutaElegida = CHATS_BOTIQUIN[moodIdContexto].rutasCondicionales[opt.idBoton];
             if (rutaElegida) {
-                // Ejecuta la ruta elegida y, al terminar, enlaza con la secuencia final universal
-                procesarSecuencia(rutaElegida, null, () => {
-                    procesarSecuencia(CHATS_BOTIQUIN[moodIdContexto].secuenciaFinal, null, null);
-                });
+                // Simulamos que tú tardas 800ms en leer su respuesta antes de seguir
+                let tId = setTimeout(() => {
+                    procesarSecuencia(rutaElegida, null, () => {
+                        procesarSecuencia(CHATS_BOTIQUIN[moodIdContexto].secuenciaFinal, null, null);
+                    });
+                }, 800);
+                botiquinTimeouts.push(tId);
             }
         };
         cajaBotones.appendChild(btn);

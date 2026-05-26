@@ -455,12 +455,51 @@ body {
 }
 
 .chat-choices-zone {
-    display: flex; justify-content: center; gap: 15px; margin-top: 15px;
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; /* Permite que los botones bajen a la siguiente línea si no caben */
+    gap: 12px; 
+    margin-top: 15px;
 }
+
 .choice-btn {
     padding: 10px 30px; border: none; border-radius: 10px;
     font-weight: bold; cursor: pointer !important; transition: 0.2s;
 }
+
+/* --- NUEVOS BOTONES DE OPCIONES PASTEL --- */
+.chat-opt-btn {
+    background: #fff0f3;
+    color: var(--rosa-oscuro);
+    border: 2px solid rgba(255, 194, 209, 0.6);
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+}
+
+.chat-opt-btn:hover {
+    background: #ffe5ec;
+    border-color: var(--rosa-vibrante);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 71, 126, 0.15);
+}
+
+/* --- BURBUJA DE MENSAJE DE ELLA (ALINEADA A LA DERECHA) --- */
+.chat-bubble.user-reply {
+    align-self: flex-end; /* La tira hacia la derecha */
+    background: linear-gradient(135deg, #ffc2d1 0%, #ffb3c6 100%);
+    color: #4a5568;
+    border: none;
+    border-radius: 18px 18px 4px 18px; /* Punta del globo hacia la derecha */
+    box-shadow: 0 3px 8px rgba(255, 71, 126, 0.15);
+    font-weight: 500;
+}
+
+/* Botones originales del minijuego (No tocar) */
 .choice-btn.yes { background: #2a9d8f; color: white; }
 .choice-btn.no { background: #e63946; color: white; }
 .choice-btn:hover { transform: scale(1.05); }
