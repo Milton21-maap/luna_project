@@ -2,7 +2,7 @@
 // BASE DE DATOS DE DIÁLOGOS EMOCIONALES (NUEVO MOTOR JSON)
 // ==========================================
 const CHATS_BOTIQUIN = {
-    1: { // TRISTE (Guion Interactivo con Opciones y Dibujo)
+    1: { // TRISTE
         secuenciaInicial: [
             { tipo: "texto", contenido: "Ay, mi niña linda..." },
             { tipo: "texto", contenido: "Debes estar en tu límite para admitir que te sientes mal, bb." },
@@ -33,7 +33,7 @@ const CHATS_BOTIQUIN = {
             { tipo: "texto", contenido: "O un pequeño detalle puede ayudar también..." },
             { tipo: "texto", contenido: "Qué tal uno de esos que te gustan tanto..." },
             { tipo: "texto", contenido: "¡Exacto! Un dibujo/carta :D" },
-            { tipo: "imagen", contenido: "assets/fotos/Triste.jpeg" }, // Tu dibujo del Cisne
+            { tipo: "imagen", contenido: "assets/fotos/Triste.jpeg" },
             { tipo: "texto", contenido: "La hice justo para ti, mi amor; espero que te guste. Ojalá te haya podido ayudar un poco con esto." },
             { tipo: "texto", contenido: "Si no fue así, sé que pasar un rato sola con tus hobbies te va a ayudar mucho :3" },
             { tipo: "texto", contenido: "Nadie morirá si te escapas por 5 minutos O.O" }
