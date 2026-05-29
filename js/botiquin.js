@@ -224,21 +224,53 @@ const CHATS_BOTIQUIN = {
     },
     6: { // ASUSTADA
         secuenciaInicial: [
-            { tipo: "texto", contenido: "Vaya... No sé cómo ayudarte en este tipo de casos, mi niña." },
-            { tipo: "texto", contenido: "Eres la mujer más valiente que conozco. :P" },
-            { tipo: "texto", contenido: "Apuesto a que, en tus zapatos, yo estaría cagado. :v" },
-            { tipo: "texto", contenido: "Ya sé, dicen que la risa es la mejor medicina. :3" },
-            { tipo: "texto", contenido: "¿Qué tal un par de chistes malos y pendejadas de mi autoría para alivianar la tensión? XD" },
-            { tipo: "video", contenido: "assets/videos/video_prueba.mp4" }
+            { tipo: "texto", contenido: "Okay, no es tan malo, mi vida." },
+            { tipo: "texto", contenido: "No sé cómo ayudarte en estos casos, pero sé que todo va a estar bien, cariño." },
+            { tipo: "texto", contenido: "Eres la mujer más valiente que conozco" },
+            { tipo: "texto", contenido: "Claro que eso no afecta en nada a lo que pueda pasar, es cierto" },
+            { tipo: "texto", contenido: "Pero no pensemos tanto en eso, vale?" },
+            { tipo: "texto", contenido: "A veces la mejor forma de enfrentar tus miedos es colocando las emociones en reposo, sabes?" },
+            { tipo: "texto", contenido: "Así que..." },
+            { tipo: "texto", contenido: "Qué te parece calmar la tensión con un par de pendejadas? :D" },
+            { tipo: "texto", contenido: "Hasta las puedes hacer sticker XD" },
+            { tipo: "texto", contenido: "No soy el mejor comediante, pero espero que al menos te haga sonreír un poco, bb" },
+            // Reemplaza el enlace por el ID de tu video gracioso de YouTube
+            { tipo: "youtube", contenido: "https://www.youtube.com/embed/ID_DE_TU_VIDEO" }
         ]
     },
     7: { // ABURRIDA
         secuenciaInicial: [
-            { tipo: "texto", contenido: "Estás aburrida, ¿eh? :P" },
-            { tipo: "texto", contenido: "Bueno, eso es algo que se puede solucionar fácilmente, mi niña linda. :3" },
-            { tipo: "texto", contenido: "Te gusta leer, ¿no?" },
-            { tipo: "texto", contenido: "Escribí esto justo para ti... Ojalá te guste" },
-            { tipo: "descargable", url: "assets/descargables/Memorias del Arma Divina.pdf", nombre: "📖 Descarga tu cuento.pdf" }
+            { tipo: "texto", contenido: "Oh, aburrida, eh?" },
+            { tipo: "texto", contenido: "Mmmmmmmm, eso se puede resolver fácilmente :3" },
+            { tipo: "texto", contenido: "Te gustan las curiosidades, ¿no?" },
+            { tipo: "texto", contenido: "Aquí te tengo una que quizás no sabías >:3" },
+            { tipo: "texto", contenido: "¿Sabías que, aunque estemos quietos, siempre estamos en constante movimiento? :O" },
+            { tipo: "opciones", opciones: [
+                { texto: "Ya lo sabía :/", idBoton: "game-sabia" },
+                { texto: "No lo sabía :O", idBoton: "game-nosabia" }
+            ]}
+        ],
+        rutasCondicionales: {
+            "game-sabia": [
+                { tipo: "texto", contenido: "Oh, ya veo :v" },
+                { tipo: "texto", contenido: "A ver, entonces otro >:3" },
+                { tipo: "texto", contenido: "¿Sabías que en la vida nada tiene sentido y lo único realmente seguro es que algún día morirás?...." },
+                { tipo: "texto", contenido: "¿O sabías que la mitología griega es considerada una de las más reales y crueles en cuanto a representación de la sociedad y castigos divinos?" },
+                { tipo: "texto", contenido: "Esto la hace una de las más interesantes y complejas :3" },
+                { tipo: "texto", contenido: "Qué locura, no? :O" }
+            ],
+            "game-nosabia": [
+                { tipo: "texto", contenido: "Oh, interesante :3" },
+                { tipo: "texto", contenido: "He estado estudiando un poco últimamente, para hacerte sentir orgullosa :3" }
+            ]
+        },
+        secuenciaFinal: [
+            { tipo: "texto", contenido: "Espero que te haya puesto a abrir Google para quitarte un poco el aburrimiento XP" },
+            { tipo: "texto", contenido: "Si aún sigues aburrida, entonces te dejo por aquí un cuento que escribí para ti" },
+            { tipo: "texto", contenido: "Es un universo que llevo tiempo construyendo, y es el primer relato que hago al respecto... Ojalá te guste" },
+            { tipo: "texto", contenido: "Te amo, disfruta la lectura :3" },
+            // Reemplazamos el video por tu botón de descarga
+            { tipo: "descargable", url: "assets/descargables/Memorias del Arma Divina.pdf", nombre: "📖 Descargar: Memorias del Arma Divina" }
         ]
     }
 };
