@@ -99,7 +99,14 @@ document.addEventListener('keydown', function(event) {
 
 // Cerrar el modal del Easter Egg
 document.getElementById('close-easter-egg').addEventListener('click', () => {
-    document.getElementById('easter-egg-modal').classList.add('hidden');
+    const easterEggModal = document.getElementById('easter-egg-modal');
+    easterEggModal.classList.add('hidden');
+    
+    // TRUCO NINJA: Cortar el video recargando el iframe
+    const iframe = easterEggModal.querySelector('iframe');
+    if (iframe) {
+        iframe.src = iframe.src; // Esto reinicia el reproductor y apaga el audio
+    }
 });
 
 // Capturamos las dos piezas nuevas
