@@ -219,7 +219,7 @@ const CHATS_BOTIQUIN = {
             { tipo: "texto", contenido: "Ojalá el día mejore." },
             { tipo: "texto", contenido: "En cuanto acabe, tómate un descanso bien largo y reconfortante... Lo tienes más que merecido." },
             { tipo: "texto", contenido: "Mira, te grabé esto. Quizás escucharme un ratito te ayude a relajarte un poco..." },
-            { tipo: "video", contenido: "assets/videos/EstresadaVideo.mp4" }
+            { tipo: "youtube", contenido: "https://www.youtube.com/embed/5HX55n6RSkQ" }
         ]
     },
     6: { // ASUSTADA
