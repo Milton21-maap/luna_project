@@ -232,10 +232,11 @@ const CHATS_BOTIQUIN = {
             { tipo: "texto", contenido: "A veces la mejor forma de enfrentar tus miedos es colocando las emociones en reposo, sabes?" },
             { tipo: "texto", contenido: "Así que..." },
             { tipo: "texto", contenido: "Qué te parece calmar la tensión con un par de pendejadas? :D" },
-            { tipo: "texto", contenido: "Hasta las puedes hacer sticker XD" },
-            { tipo: "texto", contenido: "No soy el mejor comediante, pero espero que al menos te haga sonreír un poco, bb" },
-            // Reemplaza el enlace por el ID de tu video gracioso de YouTube
-            { tipo: "youtube", contenido: "https://www.youtube.com/embed/ID_DE_TU_VIDEO" }
+            { tipo: "texto", contenido: "No estoy seguro de si de verdad esto te haga reír :/" },
+            { tipo: "texto", contenido: "Pero espero que al menos te ayude un poco, bb" },
+            { tipo: "texto", contenido: "Si eso no ayuda, las cambiaré por mis propias bromas :3" },
+            { tipo: "texto", contenido: "Te amo <3" },
+            { tipo: "youtube", contenido: "https://youtu.be/embed/N1EMAOo2NHNQfw9x" }
         ]
     },
     7: { // ABURRIDA
@@ -266,11 +267,11 @@ const CHATS_BOTIQUIN = {
         },
         secuenciaFinal: [
             { tipo: "texto", contenido: "Espero que te haya puesto a abrir Google para quitarte un poco el aburrimiento XP" },
-            { tipo: "texto", contenido: "Si aún sigues aburrida, entonces te dejo por aquí un cuento que escribí para ti" },
-            { tipo: "texto", contenido: "Es un universo que llevo tiempo construyendo, y es el primer relato que hago al respecto... Ojalá te guste" },
+            { tipo: "texto", contenido: "Si aún sigues aburrida, entonces te dejo por aquí un libro en pdf, por si se te antoja algo de romance oscuro :3" },
+            { tipo: "texto", contenido: "No preguntes cómo lo conseguí XD" },
             { tipo: "texto", contenido: "Te amo, disfruta la lectura :3" },
             // Reemplazamos el video por tu botón de descarga
-            { tipo: "descargable", url: "assets/descargables/Memorias del Arma Divina.pdf", nombre: "📖 Descargar: Memorias del Arma Divina" }
+            { tipo: "descargable", url: "assets/descargables/Butcher & Blackbird - Brynne Weavee.pdf", nombre: "📖 Descargar: Butcher & Blackbird" }
         ]
     }
 };
