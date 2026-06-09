@@ -231,6 +231,14 @@ const MIS_POEMAS = [
                "&nbsp;&nbsp;&nbsp;&nbsp;Mátame de ti, porque de amor ya no puedo morir…<br><br>" +
                "<hr style='border:none; border-top:1px dashed #c9b68d; margin:15px 0;'>" +
                "<div style='text-align: right;'><small><i>-- 25 de mayo de 2026 <br>-- De tu peqqueño inmaduro</i></small></div>"
+    },
+    { 
+        id: 8,
+        titulo: "Poema de prueba", 
+        imagen: "../assets/fondos/AmorDeLoco.jpg",
+        texto: "&nbsp;&nbsp;&nbsp;&nbsp;Poema de prueba" +
+               "<hr style='border:none; border-top:1px dashed #c9b68d; margin:15px 0;'>" +
+               "<div style='text-align: right;'><small><i>-- 25 de mayo de 2026 <br>-- De tu loco enamorado</i></small></div>"
     }
 ];
 
