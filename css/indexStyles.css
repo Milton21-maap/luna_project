@@ -1,10 +1,21 @@
 :root {
-    --fondo-gradiente: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
-    --caja-color: #ffffff;
-    --rosa-vibrante: #ff477e;
-    --rosa-oscuro: #ff0a54;
-    --texto-oscuro: #4a5568;
-    --error-color: #e63946;
+    /* Gradiente cósmico: Azul noche a Morado profundo */
+    --fondo-gradiente: linear-gradient(135deg, #0f172a 0%, #2e1065 100%);
+    
+    /* Cajas y tarjetas: Azul mate oscuro semi-transparente */
+    --caja-color: rgba(30, 41, 59, 0.7); 
+    
+    /* Acentos principales */
+    --rosa-vibrante: #8b5cf6; /* Violeta brillante (Botones y neón) */
+    --rosa-oscuro: #a855f7;
+    --azul-brillo: #38bdf8; /* Azul luminoso para acceso exitoso */
+    
+    /* Textos claros para contraste */
+    --texto-oscuro: #cbd5e1;
+    --texto-titulo: #f8fafc;
+    
+    /* Alertas */
+    --error-color: #f43f5e;
 }
 
 * {
@@ -24,6 +35,56 @@ body {
     overflow: hidden; /* Evita barras de desplazamiento raras durante las animaciones */
 }
 
+/* ========================================== */
+/* --- SISTEMA DE FONDOS Y LUNAS FANTASMA --- */
+/* ========================================== */
+.lunas-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; 
+    z-index: 1; 
+}
+
+.luna {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    background: transparent;
+    box-shadow: 25px 25px 0 0 rgba(139, 92, 246, 0.08); /* Sombra violeta fantasma */
+    filter: blur(2px); 
+}
+
+.luna-1 { top: 8%; left: 10%; transform: rotate(-35deg); }
+.luna-2 { bottom: 12%; right: 12%; transform: rotate(45deg) scale(0.85); }
+.luna-3 { top: 55%; left: 78%; transform: rotate(130deg) scale(0.6); }
+
+/* Estrellas animadas del inicio */
+.estrella { 
+    position: absolute; 
+    background: #ffffff; 
+    border-radius: 50%; 
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); 
+    animation: parpadeoEstrella 4s infinite ease-in-out; 
+    pointer-events: none; 
+}
+
+.est-1 { width: 5px; height: 5px; top: 15%; left: 15%; animation-delay: 0s; }
+.est-2 { width: 7px; height: 7px; top: 80%; left: 8%; animation-delay: 1.5s; }
+.est-3 { width: 4px; height: 4px; top: 25%; right: 10%; animation-delay: 0.7s; }
+.est-4 { width: 6px; height: 6px; top: 75%; right: 15%; animation-delay: 2.2s; }
+
+@keyframes parpadeoEstrella { 
+    0%, 100% { opacity: 0.2; transform: scale(0.7); } 
+    50% { opacity: 1; transform: scale(1.2); } 
+}
+
+/* ========================================== */
+/* --- CONTENEDOR PRINCIPAL DEL LOGIN ---     */
+/* ========================================== */
 .login-container {
     width: 100%;
     max-width: 400px;
@@ -35,17 +96,19 @@ body {
     background: var(--caja-color);
     padding: 40px 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(255, 71, 126, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     text-align: center;
-    border: 2px solid rgba(255, 194, 209, 0.5);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    backdrop-filter: blur(10px);
     transition: all 0.5s ease;
 }
 
 h2 {
-    color: var(--rosa-oscuro);
+    color: var(--texto-titulo);
     font-size: 2.5rem;
     margin-bottom: 10px;
     letter-spacing: 2px;
+    text-shadow: 0 0 12px var(--rosa-vibrante);
 }
 
 .subtitle {
@@ -55,47 +118,22 @@ h2 {
     transition: opacity 0.3s ease;
 }
 
+/* --- FORMULARIO Y CAMPOS DE TEXTO --- */
 .input-group {
     position: relative;
     margin-bottom: 25px;
-    transition: opacity 0.4s ease, transform 0.4s ease; /* Permite animar suavidad y movimiento */
+    transition: opacity 0.4s ease, transform 0.4s ease; 
 }
 
-/* --- CLASES DE ANIMACIÓN PARA LAS ETAPAS --- */
-.hidden {
-    display: none !important;
-    opacity: 0;
-}
-
-.fade-out {
-    opacity: 0;
-    transform: translateY(-20px); /* Hace que el campo suba mientras se desvanece */
-}
-
-.fade-in {
-    animation: aparecerSuave 0.5s forwards;
-}
-
-@keyframes aparecerSuave {
-    from {
-        opacity: 0;
-        transform: translateY(20px); /* Viene desde abajo hacia su posición original */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- ESTILOS DE LOS INPUTS (IGUALES) --- */
 .input-group input {
     width: 100%;
     padding: 15px 10px;
-    border: 2px solid #ddd;
+    background: rgba(15, 23, 42, 0.6); /* Fondo oscuro para el input */
+    border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: 10px;
     outline: none;
     font-size: 1rem;
-    color: var(--texto-oscuro);
+    color: var(--texto-titulo); /* Letras blancas al escribir */
     transition: 0.3s;
 }
 
@@ -104,11 +142,12 @@ h2 {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #aaa;
+    color: var(--texto-oscuro);
     pointer-events: none;
     transition: 0.3s;
-    background: var(--caja-color);
+    background: #192236; /* Color sólido oscuro para tapar la línea del borde al subir */
     padding: 0 5px;
+    border-radius: 4px;
 }
 
 .input-group input:focus ~ label,
@@ -116,39 +155,61 @@ h2 {
     top: 0;
     font-size: 0.85rem;
     color: var(--rosa-vibrante);
+    text-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
 }
 
 .input-group input:focus {
     border-color: var(--rosa-vibrante);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
 }
 
+/* --- BOTONES Y ALERTAS --- */
 button {
     width: 100%;
     padding: 15px;
-    background: var(--rosa-vibrante);
-    border: none;
-    color: white;
+    background: rgba(139, 92, 246, 0.2);
+    border: 2px solid var(--rosa-vibrante);
+    color: var(--texto-titulo);
     font-size: 1rem;
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
+    transition: all 0.3s ease;
     letter-spacing: 1px;
 }
 
-button:hover { background: var(--rosa-oscuro); }
-button:active { transform: scale(0.98); }
+button:hover { 
+    background: var(--rosa-vibrante); 
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+button:active { 
+    transform: scale(0.98); 
+}
 
 .error-msg {
-    color: var(--error-color);
+    color: var(--texto-oscuro); /* Mismo color de "PIN de Acceso" */
     font-size: 0.85rem;
     margin-top: 20px;
     font-weight: 500;
     line-height: 1.4;
-    white-space: pre-line; /* Clave para que los saltos de línea (\n) del texto funcionen en la web */
+    white-space: pre-line; 
+    text-shadow: none; /* Le quitamos el resplandor rojo */
+}
+
+/* --- CLASES DE ANIMACIÓN PARA LAS ETAPAS --- */
+.hidden { display: none !important; opacity: 0; }
+.fade-out { opacity: 0; transform: translateY(-20px); }
+.fade-in { animation: aparecerSuave 0.5s forwards; }
+
+@keyframes aparecerSuave {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ========================================== */
+/* --- MODALES DE ACCESO Y ERROR ---          */
 /* ========================================== */
 .modal-overlay {
     position: fixed;
@@ -156,8 +217,8 @@ button:active { transform: scale(0.98); }
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente detrás del modal */
-    backdrop-filter: blur(5px); /* Desfoca la pantalla de atrás para un efecto Premium */
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(8px); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,14 +227,15 @@ button:active { transform: scale(0.98); }
 }
 
 .modal-box {
-    background: white;
+    background: rgba(30, 41, 59, 0.95);
     padding: 35px;
     border-radius: 15px;
     text-align: center;
     max-width: 340px;
     width: 90%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border-top: 5px solid var(--error-color); /* Línea roja de advertencia arriba */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-top: 5px solid var(--error-color); /* Por defecto es caja de error */
 }
 
 .modal-icon {
@@ -185,6 +247,7 @@ button:active { transform: scale(0.98); }
     color: var(--error-color);
     margin-bottom: 10px;
     letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
 }
 
 .modal-box p {
@@ -193,11 +256,22 @@ button:active { transform: scale(0.98); }
     margin-bottom: 20px;
 }
 
-/* Barra de progreso animada para simular carga del sistema antes de redirigir */
+/* --- MODAL DE ACCESO EXITOSO (AZUL NEBULOSA) --- */
+.modal-box.success-box {
+    border-top: 5px solid var(--azul-brillo); 
+}
+
+.modal-box.success-box h3 {
+    color: var(--azul-brillo);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+/* Barras de carga de los modales */
 .loading-bar {
     width: 100%;
     height: 6px;
-    background: #eee;
+    background: rgba(15, 23, 42, 0.8);
     border-radius: 3px;
     overflow: hidden;
 }
@@ -206,7 +280,14 @@ button:active { transform: scale(0.98); }
     width: 0%;
     height: 100%;
     background: var(--error-color);
-    animation: cargarBarra 4s linear forwards; /* Tarda 4 segundos en llenarse */
+    animation: cargarBarra 4s linear forwards; 
+    box-shadow: 0 0 8px var(--error-color);
+}
+
+.success-progress {
+    background: var(--azul-brillo);
+    animation: cargarBarra 2s linear forwards; 
+    box-shadow: 0 0 10px var(--azul-brillo);
 }
 
 @keyframes fadeInModal {
@@ -218,70 +299,7 @@ button:active { transform: scale(0.98); }
     to { width: 100%; }
 }
 
-/* ========================================== */
-/* SISTEMA DE LUNAS SUTILES PARA EL FONDO  */
-/* ========================================== */
-
-/* Contenedor que ocupa toda la pantalla de fondo */
-.lunas-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none; /* Hace que las lunas sean "fantasma", no bloquean clics */
-    z-index: 1; /* Quedan detrás de la tarjeta (z-index: 10) pero sobre el body */
-}
-
-/* Base geométrica para crear una luna creciente */
-.luna {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Círculo perfecto */
-    /* TRUCO: El círculo es transparente, pero su sombra (box-shadow) dibuja la silueta oscura */
-    background: transparent;
-    box-shadow: 25px 25px 0 0 rgba(255, 10, 84, 0.07); /* Usa el rosa oscuro con solo 7% de opacidad */
-    filter: blur(1px); /* Suaviza los bordes para que se fusione con el gradiente */
-}
-
-/* Luna 1: Grande, arriba a la izquierda */
-.luna-1 {
-    top: 8%;
-    left: 10%;
-    transform: rotate(-35deg); /* Rotación para darle el ángulo clásico de luna */
-}
-
-/* Luna 2: Mediana, abajo a la derecha */
-.luna-2 {
-    bottom: 12%;
-    right: 12%;
-    transform: rotate(45deg) scale(0.85); /* Un poco más pequeña gracias al scale */
-}
-
-/* Luna 3: Pequeña, al centro-izquierda */
-.luna-3 {
-    top: 55%;
-    left: 78%;
-    transform: rotate(130deg) scale(0.6); /* Más pequeña y en otro ángulo */
-}
-
-/* --- MODAL DE ACCESO EXITOSO --- */
-.modal-box.success-box {
-    border-top: 5px solid #2a9d8f; /* Línea superior verde esmeralda */
-}
-
-.modal-box.success-box h3 {
-    color: #2a9d8f;
-    letter-spacing: 2px;
-}
-
-.success-progress {
-    background: #2a9d8f;
-    animation: cargarBarra 2s linear forwards; /* Tarda 2 segundos en llenarse */
-}
-
-/* Animación de latido de corazón para el icono */
+/* Animación de latido de corazón para el icono de éxito */
 .heartbeat {
     animation: latido 1.2s infinite ease-in-out;
 }

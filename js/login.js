@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURACIÓN DE CREDENCIALES DE ACCESO
 // ==========================================
-const USUARIO_CORRECTO = "HarliMorfa"; // Nombre establecido para ella
+const USUARIO_CORRECTO = "Harli_Morfa"; // Nombre establecido para ella
 const PIN_CORRECTO = "210226";         // Clave de 6 dígitos
 
 let etapaActual = 1; // Controla la fase: 1 = Nombre de Usuario, 2 = PIN de Acceso
